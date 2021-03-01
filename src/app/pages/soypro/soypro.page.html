@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="goHome ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Panel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none" (click)="goMessage ()">
+            <ion-icon slot="start" name="chatboxes"></ion-icon>
+            Mensajes
+            <!--ion-badge slot="end" color="danger">2</ion-badge-->
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none" (click)="goRequestList ()">
+            <ion-icon slot="start" name="people"></ion-icon>
+            Solicitudes abiertas
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none" (click)="goProRequestHistory ()">
+            <ion-icon slot="start" name="time"></ion-icon>
+            Historial de trabajos
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none" (click)="goProServices ()">
+            <ion-icon slot="start" name="hammer"></ion-icon>
+            Administrar servicios
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none" (click)="goProfileEdit ()">
+            <ion-icon slot="start" name="create"></ion-icon>
+            Editar perfil
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

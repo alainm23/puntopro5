@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides [options]="sliderOpts" (ionSlideDidChange)="ionSlideDidChange ()">
+    <ion-slide *ngFor="let img of image_list">
+      <img *ngIf="is_async === false" [src]="img">
+      <img *ngIf="is_async" [src]="img.image_async | async">
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer *ngIf="type === 'edit'">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="deleteImage ()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

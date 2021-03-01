@@ -1,0 +1,93 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item text-center lines="none">
+            <ion-label>
+              <h2 text-wrap>CONFIGURANDO MIS SERVICIOS</h2>
+              <p text-wrap>Marca los servicios que brindas relacionados a</p>
+            </ion-label>
+          </ion-item>
+
+          <div text-center>
+            <ion-button size="small" shape="round" color="light" (click)="goback ()">
+              {{ name }}
+              <ion-icon slot="end" name="close"></ion-icon>
+            </ion-button>
+          </div>
+
+          <ion-list>
+            <ion-radio-group formControlName="service">
+              <ion-item lines="none" *ngFor="let item of services">
+                <ion-label>{{ item.dataGeneral.name }}</ion-label>
+                <ion-radio color="dark" slot="start" [value]="item.dataGeneral" checked></ion-radio>
+              </ion-item>   
+            </ion-radio-group> 
+          </ion-list>
+
+          <ion-item>
+            <ion-label class="font-size-1rem" position="stacked">Descripcion <small> ({{ 300 - form.controls.description.value.length }})</small></ion-label>
+            <ion-textarea class="textarea-box" maxlength="300" rows="4" placeholder="Cuenta libremente sobre los beneficios de su servicio…" formControlName="description"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="font-size-1rem" position="stacked">Precio</ion-label>
+            <ion-row>
+              <ion-col size="5" class="no-padding-left">
+                <ion-input type="number" placeholder="Precio minimo S/." formControlName="min_price"></ion-input>
+              </ion-col>
+
+              <ion-col size="2" align-self-center>
+                <div text-center>
+                  —
+                </div>
+              </ion-col>
+
+              <ion-col size="5">
+                <ion-input type="number" placeholder="Precio maximo S/." formControlName="max_price"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item text-center lines="none">
+            <ion-label>
+              <h6 class="nota-head">Nota</h6>
+              <p text-wrap class="nota-body">Este dato es para uso estadístico y no se va a mostrar al publico, le pedimos que sea honesto al poner el rango de precios ya que de este sale el promedio presentado en el tarifario.</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar no-border>
+    <ion-row>
+      <ion-col size="2">
+        <ion-button expand="block" color="green" (click)="goback ()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-button expand="block" color="green" [disabled]="!form.valid" (click)="submit ()">
+          Adelante
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

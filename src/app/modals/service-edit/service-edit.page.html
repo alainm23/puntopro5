@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>Editar servicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="border-6 card-white">
+    <ion-list>
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label position="stacked">Precio minimo (S/.)</ion-label>
+          <ion-input type="text" formControlName="min_price" placeholder="S/. 20.00" clearInput=true></ion-input>
+        </ion-item>
+
+        <div *ngIf="form.controls.min_price.errors?.required && form.controls.min_price.dirty">
+          <small class="text-danger margin-left-1">* Este campo es necesario</small>
+        </div>
+
+        <ion-item>
+          <ion-label position="stacked">Precio maximo (S/.)</ion-label>
+          <ion-input type="text" formControlName="max_price" placeholder="S/. 80.00" clearInput=true></ion-input>
+        </ion-item>
+
+        <div *ngIf="form.controls.max_price.errors?.required && form.controls.max_price.dirty">
+          <small class="text-danger margin-left-1">* Este campo es necesario</small>
+        </div>
+
+        <ion-item>
+          <ion-label position="stacked">Tipo de trabajo</ion-label>
+          <ion-select placeholder="Seleccione uno"interface="popover" formControlName="type_job" (ngModelChange)="typeJobChange ($event)">
+            <ion-select-option value="job">Trabajo</ion-select-option>
+            <ion-select-option value="hour">Hora</ion-select-option>
+            <ion-select-option value="day">Jornada</ion-select-option>
+            <ion-select-option value="m2">metros cuadrados</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div *ngIf="form.controls.type_job.errors?.required && form.controls.type_job.dirty">
+          <small class="text-danger margin-left-1">* Este campo es necesario</small>
+        </div>
+
+        <ion-item>
+          <ion-label position="stacked">Descripcion</ion-label>
+          <ion-textarea rows="4" placeholder="Hago todo tipo de ..." formControlName="description"></ion-textarea>
+        </ion-item>
+
+        <div *ngIf="form.controls.description.errors?.required && form.controls.description.dirty">
+          <small class="text-danger margin-left-1">* Este campo es necesario</small>
+        </div>
+      </form>
+    </ion-list>
+  </ion-card>
+
+  <div text-center margin>
+    <ion-button color="light" fill="outline" shape="round" [disabled]="!form.valid || !form.dirty" (click)="onSubmit ()">
+      Actualizar
+    </ion-button>
+  </div>
+</ion-content>

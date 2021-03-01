@@ -1,0 +1,253 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Perfil profesional</ion-title>
+    
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar mode="ios">
+    <ion-segment mode="ios" (ionChange)="segmentChanged($event.detail.value)" color="dark" [(ngModel)]="segment_value">
+      <ion-segment-button mode="ios" value="user">
+        <ion-label>Perfil</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button mode="ios" value="pro">
+        <ion-label>Pro</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button mode="ios" value="images">
+        <ion-label>Galeria</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="segment_value === 'user'">
+    <ion-row>
+      <ion-col>
+        <div margin text-center class="avatar-container">
+          <ion-button size="small" color="dark" class="overlay-button" (click)="selectImageSource ('profile')">
+            <ion-icon slot="icon-only" name="md-camera"></ion-icon>
+          </ion-button>
+          <img (click)="selectImageSource ('profile')" class="image-avatar" [src]="avatar">
+        </div>
+
+        <form [formGroup]="user_form">
+          <ion-card class="border-6 card-white">
+            <ion-card-header class="padding-bottom-0">
+              <ion-card-subtitle>Datos personales</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-list>
+              <ion-item>
+                <ion-label position="stacked">Nombres</ion-label>
+                <ion-input type="text" placeholder="Willian" clearInput=true formControlName="first_name"></ion-input>
+              </ion-item>
+
+              <div *ngIf="user_form.controls.first_name.errors?.required && user_form.controls.first_name.dirty">
+                <small class="text-danger margin-left-1">* Este campo es necesario</small>
+              </div>
+
+              <ion-item>
+                <ion-label position="stacked">Apellidos</ion-label>
+                <ion-input type="text" placeholder="Becerra Saire" clearInput=true formControlName="last_name"></ion-input>
+              </ion-item>
+
+              <ion-item (click)="confirmCangeEmail ()">
+                <ion-label class="opacity-1" position="stacked">Correo electronico</ion-label>
+                <ion-input type="email" [disabled]="true" clearInput=true formControlName="email"></ion-input>
+              </ion-item>
+
+              <ion-item (click)="confirmCangePassword ()">
+                <ion-label class="opacity-1" position="stacked">Contraseña</ion-label>
+                <ion-input type="password" [disabled]="true" clearInput=true placeholder="******"></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-card>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="segment_value === 'pro'">
+    <ion-grid *ngIf="user_data.is_pro === true">
+      <ion-row>
+        <ion-col>
+          <form [formGroup]="pro_form">
+            <ion-card class="border-6 card-white">
+              <ion-card-header class="padding-bottom-0">
+                <ion-card-subtitle>Datos profesionales</ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-list>
+                <ion-item>
+                  <ion-label position="stacked">RUC</ion-label>
+                  <ion-input type="tel" placeholder="15878545896" clearInput=true formControlName="ruc" maxlength="11"></ion-input>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.ruc.errors?.required && pro_form.controls.ruc.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+
+                <div *ngIf="pro_form.controls.ruc.errors?.number && pro_form.controls.ruc.dirty">
+                  <small class="text-danger margin-left-1">* Numero de RUC invalido, use solo numeros</small>
+                </div>
+
+                <div *ngIf="pro_form.controls.ruc.errors?.minlength && pro_form.controls.ruc.dirty">
+                  <small class="text-danger margin-left-1">* Numero de RUC invalido, minimo 11 digitos</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Tipo de documento</ion-label>
+                  <ion-select placeholder="Seleccione uno"interface="popover" formControlName="doc_type" (ngModelChange)="docTypeChange ($event)">
+                    <ion-select-option value="DNI">DNI</ion-select-option>
+                    <ion-select-option value="CE">CE</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.doc_type.errors?.required && pro_form.controls.doc_type.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Numero de documento</ion-label>
+                  <ion-input [type]="doc_type" [minlength]="doc_number_minlength" [maxlength]="doc_number_maxlength" placeholder="74233889" clearInput=true formControlName="doc_number"></ion-input>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.doc_number.errors?.required && pro_form.controls.doc_number.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div> 
+
+                <div *ngIf="pro_form.controls.doc_number.errors?.minlength && pro_form.controls.doc_number.dirty">
+                  <small class="text-danger margin-left-1">* Numero de documento invalido, minimo {{ doc_number_minlength }} digitos</small>
+                </div>
+
+                <div *ngIf="pro_form.controls.doc_number.errors?.number && pro_form.controls.doc_number.dirty">
+                  <small class="text-danger margin-left-1">* Numero de documento invalido, use solo numeros</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Direccion</ion-label>
+                  <ion-input type="text" placeholder="Avenida los Incas, Cusco" clearInput=true formControlName="address"></ion-input>
+                </ion-item> 
+
+                <div *ngIf="pro_form.controls.address.errors?.required && pro_form.controls.address.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Fecha de nacimiento</ion-label>
+                  <ion-datetime placeholder="Seleccione una fecha" displayFormat="DD MMMM YYYY" picker-format="DD MMMM YYYY"
+                    cancelText="Cancelar" doneText="Seleccionar"
+                    monthNames="enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre"
+                    formControlName="birth_date"></ion-datetime>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.birth_date.errors?.required && pro_form.controls.birth_date.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Genero</ion-label>
+                  <ion-select placeholder="Seleccione uno" interface="popover" formControlName="gender">
+                    <ion-select-option value="male">Masculino</ion-select-option>
+                    <ion-select-option value="female">Femenino</ion-select-option>
+                    <ion-select-option value="na">Prefiero no decirlo</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.gender.errors?.required && pro_form.controls.gender.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+
+                <ion-item>
+                  <ion-label position="stacked">Descripcion <small> ({{ 300 - pro_form.controls.profile_description.value.length }})</small></ion-label>
+                  <ion-textarea maxlength="300" rows="4" placeholder="Soy un profesional ..." formControlName="profile_description"></ion-textarea>
+                </ion-item>
+
+                <div *ngIf="pro_form.controls.profile_description.errors?.required && pro_form.controls.profile_description.dirty">
+                  <small class="text-danger margin-left-1">* Este campo es necesario</small>
+                </div>
+              </ion-list>
+            </ion-card>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="user_data.is_pro === false">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" text-center color="green">
+            <ion-label>
+              <h1>No eres Pro</h1>
+              <p>asccccccccccc</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="segment_value === 'images'">
+    <ion-grid *ngIf="user_data.is_pro === true">
+      <ion-row>
+        <ion-col>
+          <ion-card class="border-6 card-white">
+            <ion-list>
+              <div *ngFor="let item of services_data">
+                <ion-item lines="none">
+                  <b>{{ item.data.service_name }}</b>
+                  <ion-button fill="clear" slot="end" color="dark" (click)="selectImageSource ('gallery', item.data)">
+                    <ion-icon slot="icon-only" name="add"></ion-icon>
+                  </ion-button>
+                </ion-item>
+
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" *ngFor="let image of item.dataGeneral">
+                      <img [src]="image.image_async | async" (click)="viewImage (item.data, item.dataGeneral, image)">
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-list>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="user_data.is_pro === false">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" text-center color="green">
+            <ion-label>
+              <h1>No eres Pro</h1>
+              <p>asccccccccccc</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="segment_value === 'user' || segment_value === 'pro'">
+  <ion-toolbar mode="ios" color="dark">
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="clear" (click)="previewPro ()" color="light">
+          Vista previa
+        </ion-button>
+      </ion-col>
+
+      <ion-col expand="block">
+        <ion-button expand="block" (click)="onSubmit ()" [disabled]="!main_form.dirty || !main_form.valid" fill="clear" color="light">
+          Actualizar perfil
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

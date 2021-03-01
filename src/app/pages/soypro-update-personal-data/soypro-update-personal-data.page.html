@@ -1,0 +1,130 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">          
+          <div margin text-center class="avatar-container">
+            <ion-button size="small" color="dark" class="overlay-button" (click)="selectImageSource ()">
+              <ion-icon slot="icon-only" name="md-camera"></ion-icon>
+            </ion-button>
+            <img id=imageid (click)="selectImageSource ()" class="image-avatar" [src]="avatar">
+          </div>
+
+          <ion-item text-center lines="none">
+            <ion-label>
+              <h2><b>{{ form.value.first_name }} {{ form.value.last_name }}</b></h2>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12">
+          <ion-card class="card-margin">
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input formControlName="first_name" placeholder="Nombres"></ion-input>
+                </ion-item>
+              </ion-col>
+    
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input formControlName="last_name" placeholder="Apellidos"></ion-input>
+                </ion-item>
+              </ion-col>
+    
+              <ion-col size="6">
+                <ion-item>
+                  <ion-select class="select-item" interface="popover" placeholder="DNI/CE" formControlName="doc_type">
+                    <ion-select-option value="DNI">DNI</ion-select-option>
+                    <ion-select-option value="CE">CE</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+    
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input formControlName="doc_number" placeholder="N° de documento"></ion-input>
+                </ion-item>
+              </ion-col>
+              
+              <ion-col size="6">
+                <ion-item>
+                  <ion-datetime class="no-padding-left" placeholder="Fecha de nacimiento" displayFormat="DD MMM YYYY" picker-format="DD MMMM YYYY"
+                    cancelText="Cancelar" doneText="Seleccionar"
+                    monthNames="enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre"
+                    formControlName="birth_date">
+                  </ion-datetime>
+                </ion-item>
+              </ion-col>
+    
+              <ion-col size="6">
+                <ion-item>
+                  <ion-select formControlName="gender" class="select-item" interface="popover" placeholder="Genero">
+                    <ion-select-option value="masculino">Masculino</ion-select-option>
+                    <ion-select-option value="femenino">Femenino</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12">
+          <div *ngIf="need_photo">
+            <small class="text-danger margin-left-1rem">* Si eres humano, pon una foto real</small>
+          </div>
+
+          <div *ngIf="form.controls.first_name.errors?.required && form.controls.first_name.dirty">
+            <small class="text-danger margin-left-1rem">* El campo 'Nombres' es necesario</small>
+          </div> 
+
+          <div *ngIf="form.controls.doc_type.errors?.required && form.controls.doc_type.dirty">
+            <small class="text-danger margin-left-1rem">* El campo 'DNI/CE' es necesario</small>
+          </div> 
+
+          <div *ngIf="form.controls.doc_number.errors?.required && form.controls.doc_number.dirty">
+            <small class="text-danger margin-left-1rem">* El campo 'N° de documento' es necesario</small>
+          </div> 
+
+          <div *ngIf="form.controls.birth_date.errors?.required && form.controls.birth_date.dirty">
+            <small class="text-danger margin-left-1rem">* El campo 'Fecha de nacimiento' es necesario</small>
+          </div> 
+
+          <div *ngIf="form.controls.gender.errors?.required && form.controls.gender.dirty">
+            <small class="text-danger margin-left-1rem">* El campo 'Genero' es necesario</small>
+          </div> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar no-border>
+    <ion-row>
+      <ion-col size="2">
+        <ion-button expand="block" color="green" (click)="goback ()" mode="md">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-button expand="block" color="green" mode="md" [disabled]="!form.valid" (click)="submit ()">
+          Guardar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

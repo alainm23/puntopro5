@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "75992481757",
+    "firebase_url": "https://puntopro-b952d.firebaseio.com",
+    "project_id": "puntopro-b952d",
+    "storage_bucket": "puntopro-b952d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75992481757:android:6a315740162964bd",
+        "android_client_info": {
+          "package_name": "pe.com.puntopro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75992481757-6s90pi7ctkfme03gaah5kln7e9t1v3db.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.com.puntopro",
+            "certificate_hash": "fbf87ded7639557963b14bf73da38541f37b1449"
+          }
+        },
+        {
+          "client_id": "75992481757-3c6q1trlgc58f40lrktd00lcu4es7se4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWLMEfZ5mlGeiqVm-e_LoRcVTIxJvMapk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75992481757-3c6q1trlgc58f40lrktd00lcu4es7se4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "75992481757-nflahri0eu9cpq111o2kkpgns2lksi2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pe.com.puntopro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

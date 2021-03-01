@@ -1,0 +1,55 @@
+.logo-size {
+  width: 7rem;
+}
+
+ion-content{
+  --background: none;
+  background-image: url('/assets/img/background-login.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.margin-right-1 {
+  margin-right: 1rem;
+}
+
+.social-icon {
+  font-size: 3rem;
+}
+
+.entry {
+  --border-radius: 4px;
+  --background: #393B47;
+  --color: #fff;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.entry ion-icon {
+  color: #fff;
+}
+
+.margin-bottom {
+  margin-bottom: 0.5rem;
+}
+
+.sub-title-color {
+  margin-top: 0px;
+  color:#ffffffab;
+}
+
+.help-icon {
+  color: #ffffff8a;
+  border: 1px solid #ffffff8a;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.transparent {
+  background-color: transparentM
+}
+
+.icon-size {
+  font-size: 10px;
+}

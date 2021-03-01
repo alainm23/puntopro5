@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="absolute">
+    <div [ngSwitch]="visible">
+      <div *ngSwitchCase="0">
+        <img src="../../../assets/img/tutorial_01.jpg">
+      </div>
+
+      <div *ngSwitchCase="1">
+        <img src="../../../assets/img/tutorial_02.jpg">
+      </div>
+
+      <div *ngSwitchCase="2">
+        <img src="../../../assets/img/tutorial_03.jpg">
+      </div>
+
+      <div *ngSwitchCase="3">
+        <img src="../../../assets/img/tutorial_04.jpg">
+      </div>
+
+      <div *ngSwitchCase="4">
+        <img src="../../../assets/img/tutorial_05.jpg">
+      </div>
+    </div>
+  </div>
+
+  <div class="relative">
+    <ion-row>
+      <ion-col size="2">
+        <ion-button size="small" shape="round" class="button-round" (click)="back ()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="8" align-self-center>
+        <div text-center>
+          <ion-button fill="outline" color="white" (click)="omitir ()">
+            Omitir
+          </ion-button>
+        </div>
+      </ion-col>
+
+      <ion-col size="2">
+        <ion-button size="small" shape="round" class="button-round" (click)="forward ()">
+          <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ request?.service_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-list *ngIf="is_loading === false">
+            <ion-label class="item-header" position="stacked">Cliente</ion-label>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              {{ request?.client_name }}
+            </ion-item>
+
+            <hr class="card-separator">
+            <ion-label class="item-header" position="stacked">Fecha de solicitud</ion-label>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              {{ getFormatDate (request?.created_date) }}
+            </ion-item>
+
+            <hr class="card-separator">
+            <ion-label class="item-header" position="stacked">Direccion</ion-label>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              {{ request?.address_name }}
+            </ion-item>
+
+            <hr class="card-separator">
+            <ion-label class="item-header" position="stacked">Detalles</ion-label>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              <p class="detail">{{ request?.note }}</p>
+            </ion-item>
+
+            <div *ngIf="images.length > 0">
+              <hr class="card-separator">
+              <ion-label class="item-header" position="stacked">Imagenes</ion-label>
+              <hr class="card-separator">
+              <ion-grid>
+                <ion-row>
+                  <ion-col *ngFor="let img of images">
+                    <img class="request-img" [src]="img | async">
+                  </ion-col>
+                </ion-row>  
+              </ion-grid>
+            </div>
+          </ion-list>   
+          <ion-list>
+            <hr class="card-separator">
+            <ion-label class="item-header" position="stacked">Mapa</ion-label>
+            <hr class="card-separator">
+
+            <ion-card no-padding no-margin class="map-class">
+              <div #map id="map"></div>
+            </ion-card>
+          </ion-list>     
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer *ngIf="auth.user_data?.is_pro === true">
+  <ion-toolbar>
+    <ion-button *ngIf="is_quote_sent === false" expand="block" color="orange" (click)="postulate ()">
+      <span *ngIf="request?.is_emergency === true">Postular</span>
+      <span *ngIf="request?.is_emergency === false">Enviar cotizacion</span>
+    </ion-button>
+    
+    <ion-item *ngIf="is_quote_sent === true" lines="none" text-center>
+      Ya postulaste...
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

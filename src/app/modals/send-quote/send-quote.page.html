@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Enviar cotización</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="border-6 card-white">
+    <ion-list>
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label position="stacked">Mensaje</ion-label>
+          <ion-textarea rows="4" placeholder="Hago todo tipo de ..." formControlName="message"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Precio minumo</ion-label>
+          <ion-input type="text" formControlName="min_price" placeholder="S/. 20.00" clearInput=true></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Precio maximo</ion-label>
+          <ion-input type="text" formControlName="max_price" placeholder="S/. 20.00" clearInput=true></ion-input>
+        </ion-item>
+      </form>
+    </ion-list>
+  </ion-card>
+
+  <div text-center margin>
+    <ion-button color="light" fill="outline" shape="round" [disabled]="!form.valid" (click)="onSubmit ()">
+      Enviar
+    </ion-button>
+  </div>
+</ion-content>

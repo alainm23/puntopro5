@@ -1,0 +1,39 @@
+<ion-header no-border>
+  <ion-toolbar no-border mode="ios">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal ()">
+        Atras
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Mis ubicaciones
+    </ion-title>
+    <!--ion-searchbar mode="ios" (ionInput)="updateSearch($event)" animated="true" placeholder="Buscar un lugar..."></ion-searchbar-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="is_loading === false">
+    <ion-list *ngIf="locations.length > 0 === true" class="margin-right-1 animation">
+      <ion-list-header>
+        <ion-label>Mis ubicaciones</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let item of locations" (click)="goLocation (item, 'user')">
+        <ion-icon slot="start" name="pin"></ion-icon>
+        {{ item?.name }}
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="locations.length > 0 === false" text-center padding>
+      <h4>Ninguna ubicacion guardada</h4>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae quo veritatis dicta blanditiis porro magnam tenetur illo tempora! Soluta, vel distinctio et commodi quas sequi vero fuga! Cupiditate, doloremque eligendi.</p>
+    </div>
+  </div>
+</ion-content>

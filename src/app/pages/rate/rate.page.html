@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>rate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="imagebase64">
+  <ion-button (click)="Upload ()">Upload</ion-button>
+  <ion-button (click)="get ()">Set Value</ion-button>
+</ion-content>

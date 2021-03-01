@@ -1,0 +1,103 @@
+<ion-content padding>
+  <div text-right>
+    <ion-icon class="help-icon" slot="icon-only" name="help"></ion-icon>
+  </div>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="12" size-sm="8" offset-sm="2"  size-md="6" offset-md="3" size-lg="4" offset-lg="4" size-xl="4" offset-xl="4">
+          <div padding text-center class="transparent" [ngStyle]="{ 'margin-top': css_margin_top }">
+            <img class="logo-size" src="assets/img/image-login.png">
+            <p class="sub-title-color"><i>Los mejores profesionales para ti</i></p>
+          </div>
+
+          <ion-item lines="none" class="entry margin-bottom">
+            <ion-icon slot="start" name="mail"></ion-icon>
+            <ion-input formControlName="email" type="email" placeholder="Correo electronico" required=true></ion-input>
+          </ion-item>    
+          <ion-item lines="none" class="entry">
+            <ion-icon slot="start" name="lock"></ion-icon>
+            <ion-input formControlName="password" type="password" placeholder="*********" required=true></ion-input>
+          </ion-item>
+
+          <div text-center>
+            <p class="text-white margin-right-1">
+              <small>
+              ¿Olvidaste tu contraseña?
+              <b (click)="resetPassword ()">Recueralo aqui ></b>
+              </small>
+            </p>
+          </div>
+
+          <ion-row mode="md">
+            <ion-col size="8">
+              <ion-button mode="md" color="violet" expand="block" [disabled]="!form.valid" (click)="onSubmit ()">
+                CONECTAR 
+              </ion-button>
+            </ion-col>
+
+            <ion-col size="2">
+              <ion-button class="icon-size" mode="md" color="violet" expand="block" (click)="facebook ()">
+                <ion-icon mode="md" slot="icon-only" name="logo-facebook"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <ion-col size="2">
+              <ion-button class="icon-size" mode="md" color="violet" expand="block" (click)="google ()">
+                <ion-icon mode="md" slot="icon-only" name="logo-google"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <div text-center>
+            <p class="text-white margin-right-1" (click)="signUp ()">
+              <small>
+              ¿No tienes una cuenta? <b>Registrate ahora</b>
+              </small>
+            </p>
+          </div>
+
+          <div text-center>
+            <p class="text-white">
+              <small>¿Por que tengo que registrarme?</small>
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+    
+  <!--div padding text-center style="background-color: transparent;">
+    <img class="logo-size" src="assets/img/PuntoPro.png">
+  </div>
+
+  
+
+  <div text-right>
+    <p class="text-white margin-right-1" (click)="resetPassword ()">Olvidaste tu contraseña?</p>
+  </div>
+
+  <div text-center>
+    <ion-button color="light" fill="outline" shape="round" [disabled]="!form.valid" (click)="onSubmit ()">
+      Conectar
+    </ion-button>
+  </div>
+
+  <div text-center>
+    <p class="text-white">O continua con:</p>
+  </div>
+
+  <div text-center>
+    <ion-icon class="social-icon" color="light" name="logo-facebook" (click)="facebook ()"></ion-icon>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <ion-icon class="social-icon" color="light" name="logo-google" (click)="google ()"></ion-icon>
+  </div>
+
+  <div text-center>
+    <p class="text-white">¿Nuevo usuario? <b (click)="signUp ()">Registrate</b></p> 
+  </div>
+
+  <div text-center>
+    <p class="text-white" outline clear (click)="anonymousLogin ()">Ingresa como <b>Anonimo</b></p>
+  </div-->
+</ion-content>

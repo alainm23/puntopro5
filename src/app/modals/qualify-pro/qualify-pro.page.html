@@ -1,0 +1,133 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" text-center>
+          <ion-label>
+            <h1 class="font-bold">Calificar profesional</h1>
+            <p text-wrap>Danos tu opinion sobre el trabajo de <b>Jose Cuevo</b></p>
+          </ion-label>
+        </ion-item>
+
+        <div text-center>
+          <h4 class="no-margin-bottom dim-label">Puntualidad</h4>
+          <p class="no-margin-top dim-label">¿Cumplio con los horarios pactados?</p>
+
+          <div class="icon-size margin-top-6">
+            <ion-icon class="start" name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+              (click)="rate (0, num)" [ngStyle]="{'color': getColor (0, num)}"> 
+            </ion-icon>
+          </div>
+        </div>
+
+        <div text-center>
+          <h4 class="no-margin-bottom dim-label">Profesionalismo</h4>
+          <p class="no-margin-top dim-label">¿Pudo solucionar el problema de manera satisfactoria?</p>
+
+          <div class="icon-size margin-top-6">
+            <ion-icon class="start" name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+              (click)="rate (1, num)" [ngStyle]="{'color': getColor (1, num)}"> 
+            </ion-icon>
+          </div>
+        </div>
+
+
+        <div text-center>
+          <h4 class="no-margin-bottom dim-label">Precio justo</h4>
+          <p class="no-margin-top dim-label">¿Cobró una suma acorde a la cantidad de trabajo brindado?</p>
+
+          <div class="icon-size margin-top-6">
+            <ion-icon class="start" name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+              (click)="rate (2, num)" [ngStyle]="{'color': getColor (2, num)}"> 
+            </ion-icon>
+          </div>
+        </div>
+
+        <form [formGroup]="form" class="form-class">
+          <ion-textarea 
+            class="margin-top-6 textarea-css" 
+            maxlength="120" 
+            rows="3" 
+            placeholder="¿Algo más que nos quieras contar?" 
+            formControlName="comment"
+            [(ngModel)]="comment">
+          </ion-textarea>
+          
+          <div *ngIf="form.controls.comment.errors?.required && form.controls.comment.dirty">
+            <small class="text-danger">* Este campo es necesario</small>
+          </div>
+        </form>
+
+        <ion-row class="ion-margin-top">
+          <ion-col size="6">
+            <ion-button expand="block">
+              Volver
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button expand="block">
+              Calificar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--div>
+    <ion-label><b>Atencion al cliente:</b></ion-label>
+    <div class="icon-size margin-top-6">
+      <ion-icon name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+        (click)="rate (0, num)" [ngStyle]="{'color': getColor (0, num)}"> 
+      </ion-icon>
+    </div>
+
+    <ion-label><b>Calidad servicio:</b></ion-label>
+    <div class="icon-size margin-top-6">
+      <ion-icon name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+        (click)="rate (1, num)" [ngStyle]="{'color': getColor (1, num)}"> 
+      </ion-icon>
+    </div>
+    
+    <ion-label><b>Precio justo:</b></ion-label>
+    <div class="icon-size margin-top-6">
+      <ion-icon name="star" *ngFor="let num of [1, 2, 3, 4, 5]" 
+        (click)="rate (2, num)" [ngStyle]="{'color': getColor (2, num)}"> 
+      </ion-icon>
+    </div>
+  </div>
+  <form [formGroup]="form">
+    <ion-label padding-left><b>Comentario</b><small>  {{ 120 - comment.length }}</small></ion-label>
+    <ion-textarea 
+      class="margin-top-6 textarea-css" 
+      maxlength="120" 
+      rows="6" 
+      placeholder="" 
+      formControlName="comment"
+      [(ngModel)]="comment">
+    </ion-textarea>
+    
+    <div *ngIf="form.controls.comment.errors?.required && form.controls.comment.dirty">
+      <small class="text-danger">* Este campo es necesario</small>
+    </div>
+  </form>
+  <div text-center margin>
+    <ion-button color="dark" fill="outline" shape="round" (click)="onSubmit ()" [disabled]="!form.valid">
+      Calificar
+    </ion-button>
+  </div-->
+</ion-content>

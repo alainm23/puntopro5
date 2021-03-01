@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+import { IonicModule } from '@ionic/angular';
+
+import { SelectCategoriesPage } from './select-categories.page';
+
+// Modals
+import { SelectServicePageModule } from '../../modals/select-service/select-service.module';
+const routes: Routes = [
+  {
+    path: '',
+    component: SelectCategoriesPage
+  }
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [SelectCategoriesPage]
+})
+export class SelectCategoriesPageModule {}

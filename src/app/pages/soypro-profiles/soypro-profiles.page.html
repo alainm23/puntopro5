@@ -1,0 +1,35 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div text-center>
+          <img class="avatar avatar-card" [src]="auth.user_data?.avatar"/>
+        </div>
+
+        <ion-item text-center lines="none">
+          <ion-label>
+            <h2><b>{{ auth.user_data?.first_name }} {{ auth.user_data?.last_name }}</b></h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item text-center lines="none">
+          <ion-label>
+            <h3>CONFIGURANDO MIS SERVICIOS</h3>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

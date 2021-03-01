@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>categories</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="chagedView ()">
+        Lista
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <!--ion-grid *ngIf="view_type === 'card'">
+    <ion-row>
+      <ion-col *ngFor="let item of items">
+        <ion-card (click)="selectEs (item)">
+          <img src="https://picsum.photos/300/300">
+          <ion-item text-center no-lines>
+            <ion-label>
+              {{ item?.data.name }}
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="view_type === 'list'">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <div *ngFor="let item of items">
+            <ion-item (click)="visibleSubC (item)">
+              <ion-icon class="icon-margin" slot="start" name="arrow-dropright"></ion-icon>
+              {{ item?.data.name }}
+            </ion-item>
+
+            <ion-list class="sub-categories" *ngIf="item.show_subcategories">
+              <ion-item *ngFor="let sub of item?.SubCategories" (click)="goProList (sub?.dataGeneral)">
+                <ion-icon class="icon-margin" slot="start" name="arrow-dropright"></ion-icon>
+                {{ sub?.dataGeneral.name }}
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid-->
+
+  
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons mode="md" slot="start">
+      <ion-back-button mode="md" text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-card-header no-padding class="header-padding">
+      <ion-card-title class="title-font-size">{{ this.search_request.subcategory_name }}</ion-card-title>
+      <ion-card-subtitle>{{ this.search_request.address_name }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button size="small" color="dark">
+        Relevancia
+        <ion-icon slot="end" name="arrow-dropdown"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button size="small" color="dark">
+        Filtrar
+        <ion-icon slot="end" name="arrow-dropdown"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false" style="height: 100%;">
+    <ion-list *ngIf="pros_list.length > 0 === true">
+      <div *ngFor="let item of pros_list">
+        <ion-item>
+          <ion-avatar slot="start" class="avatar" (click)="goProfile (item?.dataGeneral)">
+            <img [src]="item?.dataGeneral.avatar"/>
+          </ion-avatar>
+          <ion-label (click)="goProfile (item?.dataGeneral)">
+            <h2>{{ item?.dataGeneral.fullname }}</h2>
+            <h3>I'm a big deal</h3>
+            <!--p>Listen, I've had a pretty messed up day...</p-->
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
+
+    <ion-grid *ngIf="pros_list.length > 0 === false" style="height: 100%; margin-bottom: 1rem">
+      <ion-row justify-content-center align-items-center style="height: 100%">
+        <ion-item text-center lines="none">
+          <ion-label text-wrap>
+            <ion-text>
+              <h3>No hay resultados</h3>
+            </ion-text>
+            <p>Ningun resultado con "{{ this.search_request.subcategory_name }}". intenta algo distinto</p>
+          </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" color="dark" fill="outline" (click)="requestPros ()">
+    Hacer un cotizacion
+  </ion-button>
+</ion-footer>

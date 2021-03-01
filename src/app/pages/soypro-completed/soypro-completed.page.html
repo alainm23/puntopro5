@@ -1,0 +1,35 @@
+<ion-content classs="image-background">
+  <ion-grid style="height: 100%"  no-padding no-margin>
+    <ion-row style="height: 100%" no-padding no-margin>
+      <ion-col style="height: 100%" no-padding no-margin>
+        <div text-center padding-top class="center">
+          <img class="img-size" padding src="/assets/img/SoyPro.svg">
+        </div>
+        
+        <ion-item text-center lines="none" class="valign-center">
+          <ion-label>
+            <h1>¡Felicitaciones!</h1>
+            <h2 class="font-bold">YA ERES PRO</h2>
+          </ion-label>
+        </ion-item>
+        <!-->h2 class="text-violet">Felicitaciones, ya eres Pro</h2>
+    
+        <img class="img-size" padding-top src="/assets/img/slide_02.svg">
+
+        <ion-button color="violet" margin-top (click)="goSoyProPage ()">
+          Adelante a trabajar
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button-->
+        <div text-center class="position-bottom">
+          <ion-card (click)="goSoyProPage ()" no-padding no-margin>
+            <ion-item lines="none" text-center>
+              <ion-label>
+                ¡A trabajar!
+              </ion-label>
+            </ion-item>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

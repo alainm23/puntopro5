@@ -1,0 +1,263 @@
+<ion-header no-border>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <ion-button fill="clear" color="dark" (click)="closeModal ()">
+          <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title>
+        <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <!-->ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false && is_found === false" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <div text-center>
+        <h3>Perfil no encontrado</h3>
+        <p>Por alguna raozn paso algo yo no se dxdx</p>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false && is_found === true">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="avatar" (click)="viewAvatar (profile_data?.avatar)">
+        <img [src]="profile_data?.avatar"/>
+      </ion-avatar>
+      <ion-label>
+       <h2>Contacto: {{ profile_data?.fullname }}</h2>
+       <h3>Pro desde: {{ getRelativeDateTime (profile_data?.join_date) }}</h3>
+       <!--p>Listen, I've had a pretty messed up day...</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" fill="outline" color="dark" size="small" 
+            (click)="callPhoneNumber (profile_data?.phone_number)">
+            <ion-icon slot="start" name="call"></ion-icon>
+            {{ profile_data?.phone_number }}
+          </ion-button>
+        </ion-col>
+
+        <ion-col *ngIf="to_confirm === false">
+          <ion-button expand="block" fill="outline" color="danger" size="small"
+            (click)="connectPro ()">
+            <ion-icon slot="start" name="text"></ion-icon>
+            Contactar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col align-self-center>
+          <ion-button color="dark" expand="block" fill="clear" (click)="changeFavorite ()">
+            <ion-icon slot="icon-only" [name]="star_icon"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col align-self-center>
+          <ion-button color="dark" expand="block" fill="clear">
+            <ion-icon slot="icon-only" name="image"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col align-self-center>
+          <ion-button color="dark" expand="block" fill="clear">
+            <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col align-self-center>
+          <ion-button color="dark" expand="block" fill="clear" (click)="shareProfile ()">
+            <ion-icon slot="icon-only" name="share"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Acerca de mi</b></h3>
+          </ion-text>
+          <p class="padding-top-1">{{ profile_data?.profile_description }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Especialidades <small>(Presione para ver los detalles)</small></b></h3>
+          </ion-text>
+          <ul class="specialties-list">
+            <li *ngFor="let item of profile_services" (click)="seeDetail (item)">
+              {{ item?.service_name }}
+            </li>
+          </ul>
+        </ion-label>
+      </ion-item>
+
+      <ion-list>
+        <ion-list-header>
+          <b>Comentarios</b>
+        </ion-list-header>    
+
+        <ion-card *ngFor="let item of comments">
+          <ion-item>
+            <ion-label text-wrap>
+              <ion-text>
+                <h3><b>
+                  {{ item?.dataGeneral.user_name }}
+                  <span *ngFor="let x of getAverage (item?.dataGeneral)">
+                    <ion-icon name="star"></ion-icon>
+                  </span>
+                </b></h3>
+              </ion-text>
+              <small>{{ getFormatDateTime (item?.dataGeneral.date) }}</small>
+              <p class="padding-top-1">{{ item?.dataGeneral.comment }}</p>            
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </ion-list>
+  </ion-grid-->
+
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid no-padding *ngIf="is_loading === false">
+    <ion-row no-padding>
+      <ion-col size="12">
+        <div text-center>
+          <img class="profile-avatar avatar-card size-" [src]="pro_data?.avatar"/>
+        </div>
+
+        <ion-item text-center lines="none">
+          <ion-label class="no-margin-top">
+            <h2><b>{{ pro_data?.fullname }}</b></h2>
+            <p>{{ profile?.name }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-label>
+            <h2 class="font-bold padding-bottom-6px">Acerca de mi trabajo</h2>
+            <p class="detail" text-wrap>{{ profile?.description }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <h2 class="font-bold padding-bottom-6px">Especialidades</h2>
+            <p class="detail" text-wrap *ngFor="let item of profile?.services">
+              {{ item?.name }}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      
+      <ion-col size="12" no-padding>
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col no-padding>
+              <div class="image-container" [ngStyle]="{'background-image': 'url(' + photo_1 + ')'}"></div>
+            </ion-col>
+
+            <ion-col no-padding>
+              <div class="image-container" [ngStyle]="{'background-image': 'url(' + photo_2 + ')'}"></div>
+            </ion-col>
+
+            <ion-col no-padding>
+              <div class="image-container" [ngStyle]="{'background-image': 'url(' + photo_3 + ')'}"></div>
+            </ion-col>
+
+            <ion-col no-padding>
+              <div class="image-container" [ngStyle]="{'background-image': 'url(' + photo_4 + ')'}"></div>
+            </ion-col>
+
+            <ion-col no-padding>
+              <div class="image-container" [ngStyle]="{'background-image': 'url(' + photo_5 + ')'}"></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button fill="clear" color="dark" (click)="changeFavorite ()">
+          <ion-icon slot="icon-only"  [name]="star_icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center>
+        <ion-button fill="clear" color="dark">
+          <ion-icon slot="icon-only"  name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center>
+        <ion-button fill="clear" color="dark">
+          <ion-icon slot="icon-only"  name="heart-empty"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col align-self-center>
+        <ion-button fill="clear" color="dark">
+          <ion-icon slot="icon-only"  name="heart-empty"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col align-self-center>
+        <ion-button fill="clear" color="dark" (click)="shareProfile ()">
+          <ion-icon slot="icon-only"  name="share"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="to_confirm === false">
+  <ion-row>
+    <ion-col size="6" style="background-color: #F49519;">
+      <ion-button expand="block" fill="clear" color="light" (click)="takePicture ()">
+        Llamar
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="6" style="background-color: #20A19A;">
+      <ion-button expand="block" fill="clear" color="light" (click)="selectPicture ()">
+        Chatear
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+<ion-footer *ngIf="to_confirm === true">
+  <ion-toolbar color="orange" >
+    <ion-button expand="block" fill="clear" color="light" (click)="confirm ()">
+      Confirmar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

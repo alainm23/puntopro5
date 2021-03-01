@@ -1,0 +1,114 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" text-center>
+          <ion-label>
+            <h2>ELIGE TU PLAN</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-segment color="orange" (ionChange)="segmentChanged($event.detail.value)" [(ngModel)]="segment_value">
+          <ion-segment-button class="no-text-transform" value="0">
+            <ion-label>Gratuito</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="no-text-transform" value="1">
+            <ion-label>Estandar</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="no-text-transform" value="2">
+            <ion-label>Premium</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-slides margin-top class="hexpand" [options]="slideOpts" (ionSlideDidChange)="ionSlideDidChange ()">
+          <ion-slide>
+            <ion-item text-center lines="none">
+              <ion-label>
+                <h1 class="text-grey">Gratis</h1>
+                <p>Servicio ilimitado</p>
+              </ion-label>
+            </ion-item>
+
+            <ul text-start class="text-grey margin-left-24">
+              <li>Nombre, contacto, y Foto principal</li>
+              <li>Configuracion de servicios</li>
+              <li>Presentacion</li>
+            </ul>
+          </ion-slide>
+      
+          <ion-slide>
+            <ion-item text-center lines="none">
+              <ion-label>
+                <h1 class="text-grey">Solo S/. 14.90 <small>por mes</small></h1>
+                <p>(Paga por todo el año y recibe 1 mes gratis)</p>
+              </ion-label>
+            </ion-item>
+                  
+            <ul text-start class="text-grey margin-left-24">
+              <li>Nombre, contacto, y Foto principal</li>
+              <li>Configuracion de servicios</li>
+              <li>Presentacion</li>
+              <li>Galeria de trabajos realizados</li>
+              <li>Recibir solicitudes de trabajo</li>
+              <li>Historia de trabajos</li>
+              <li>Capacitaciones y talleres</li>
+              <li>Poder aportar a la comunidad</li>
+              <li>Prioridad en ls solicitudes</li>
+            </ul>
+          </ion-slide>
+          
+          <ion-slide>
+            <ion-item text-center lines="none">
+              <ion-label>
+                <h1 class="text-grey">Solo S/. 27.00 <small>por mes</small></h1>
+                <p>(Paga por todo el año y recibe 1 mes gratis)</p>
+              </ion-label>
+            </ion-item>
+                  
+            <ul text-start class="text-grey margin-left-24">
+              <li>Nombre, contacto, y Foto principal</li>
+              <li>Configuracion de servicios</li>
+              <li>Presentacion</li>
+              <li>Galeria de trabajos realizados</li>
+              <li>Recibir solicitudes de trabajo</li>
+              <li>Historia de trabajos</li>
+              <li>Capacitaciones y talleres</li>
+              <li>Poder aportar a la comunidad</li>
+              <li>Prioridad en ls solicitudes</li>
+            </ul>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar no-border>
+    <ion-row>
+      <ion-col size="2">
+        <ion-button expand="block" color="green" (click)="goback ()" mode="md">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-button expand="block" color="green" (click)="submit ()" mode="md">
+          Elegir plan
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-list>
+    <ion-item (click)="close (1)">
+      <ion-icon slot="start" name="cloud-download"></ion-icon>
+      Descargar chat
+    </ion-item>
+
+    <ion-item *ngIf="type ===  'user'">
+      <ion-icon slot="start" name="alert"></ion-icon>
+      Calificar profesional
+    </ion-item>
+
+
+    <ion-item *ngIf="type ===  'user'">
+      <ion-icon slot="start" name="alert"></ion-icon>
+      Denunciar profesional
+    </ion-item>
+
+    <ion-item *ngIf="type !==  'user'">
+      <ion-icon slot="start" name="alert"></ion-icon>
+      Denunciar usuario
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="pin"></ion-icon>
+      Enviar ubicacion
+    </ion-item>
+
+    <ion-item *ngIf="type ===  'user'">
+      <ion-icon slot="start" name="pin"></ion-icon>
+      Contrate este profesional
+    </ion-item>
+  </ion-list>
+</ion-content>

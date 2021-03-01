@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Historial de trabajos</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar mode="ios">
+    <ion-segment color="dark" (ionChange)="segmentChanged($event.detail.value)" [(ngModel)]="segment_value">
+      <ion-segment-button value="sent">
+        <ion-label>Postulados</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="in_progress">
+        <ion-label>En progreso</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="finalized">
+        <ion-label>Finalizados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-card mode="md" *ngFor="let item of list" (click)="viewRequest (item?.dataGeneral)">
+            <ion-card-header class="request-card-header">
+              <ion-card-title>{{ item?.dataGeneral.title }}</ion-card-title>
+              <ion-item lines="none" no-padding no-margin>
+                {{ getRelativeDateTime (item?.dataGeneral.created_date) }}
+                <ion-badge class="request-badge-margin" color="orange">{{ item?.dataGeneral.service_name }}</ion-badge>
+              </ion-item>
+            </ion-card-header>
+            <hr class="card-separator">
+            <ion-card-content>
+              {{ item?.dataGeneral.detail }}
+            </ion-card-content>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              Postulantes
+              <ion-badge class="request-badge-margin" *ngIf="item.postulants > 0" color="danger">
+                {{ item.postulants }}
+              </ion-badge>
+
+              <ion-badge class="request-badge-margin" *ngIf="!item.postulants > 0" color="danger">
+                0
+              </ion-badge>
+              <ion-button fill="outline" slot="end" color="dark">Ver</ion-button>
+            </ion-item>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Solicitudes de emergencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="is_loading === false">
+    <ion-list *ngFor="let item of requests">
+      <ion-list>
+        <ion-card mode="md" *ngFor="let item of item.dataGeneral" (click)="viewRequest (item?.dataGeneral)">
+          <ion-card-header class="request-card-header">
+            <ion-card-title class="title-font-size">{{ item?.dataGeneral.address_name }}</ion-card-title>
+            <ion-item lines="none" no-padding no-margin>
+              {{ item?.dataGeneral.client_name }}
+            </ion-item>
+            <ion-badge class="request-badge-margin" color="orange">
+              {{ item?.dataGeneral.subcategory_name }}
+            </ion-badge>
+          </ion-card-header>
+          <hr class="card-separator">
+          <ion-item lines="none">
+            <ion-label>
+              {{ getRelativeDateTime (item?.dataGeneral.created_date) }}
+            </ion-label>
+            <ion-button fill="outline" slot="end" color="dark">Ver</ion-button>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </ion-list>
+  </div>
+</ion-content>

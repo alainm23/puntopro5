@@ -1,0 +1,66 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar mode="ios">
+    <ion-title>
+      Mis solicitudes
+   </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment color="orange" [(ngModel)]="segment_value">
+      <ion-segment-button value="0">
+        <ion-label>Emergencia</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-label>Cotizacion</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div [ngSwitch]="segment_value">
+    <div *ngSwitchCase="0">
+      <ion-list *ngFor="let x of emergency_items">
+        <ion-list>
+          <ion-item *ngFor="let item of x.dataGeneral" (click)="viewRequest (item?.dataGeneral)">
+            <ion-thumbnail slot="start">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ item.dataGeneral.service_name }}</h2>
+              <small>{{ item.dataGeneral.date_added }}</small>
+              <p text-wrap>{{ item.dataGeneral.note.substring (0, 25) }}...</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="1">
+      <ion-list *ngFor="let x of quotation_items">
+        <ion-list>
+          <ion-item *ngFor="let item of x.dataGeneral" (click)="viewRequest (item?.dataGeneral)">
+            <ion-thumbnail slot="start">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ item.dataGeneral.service_name }}</h2>
+              <small>{{ item.dataGeneral.date_added }}</small>
+              <p text-wrap>{{ item.dataGeneral.note.substring (0, 25) }}...</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

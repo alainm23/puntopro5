@@ -1,0 +1,117 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar mode="ios">
+    <ion-title>
+      Mis solicitudes
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-row>
+      <ion-segment color="orange" (ionChange)="segmentChanged($event.detail.value)" [(ngModel)]="segment_value">
+        <ion-segment-button value="created">
+          <ion-label>Solicitados</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="in_progress">
+          <ion-label>En progreso</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="finalized">
+          <ion-label>Finalizados</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+
+    <ion-row>
+      <ion-select interface="action-sheet" [(ngModel)]="select_value">
+        <ion-select-option value="0">Mostrar - solicitudes de emergencia</ion-select-option>
+        <ion-select-option value="1">Mostrar - solicitudes de cotización</ion-select-option>
+      </ion-select>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-list>
+    <ion-item *ngFor="let item of items"  (click)="viewRequest (item?.dataGeneral)">
+      <ion-thumbnail slot="start">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.dataGeneral.service_name }}</h2>
+        <small>{{ item.dataGeneral.date_added }}</small>
+        <p text-wrap>{{ item.dataGeneral.note.substring (0, 25) }}...</p>
+      </ion-label>
+      <ion-badge slot="end" color="orange">Active</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<!--ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Historial de solicitudes</ion-title>
+  </ion-toolbar>
+
+  <!--ion-toolbar mode="ios">
+    <ion-segment color="dark" (ionChange)="segmentChanged($event.detail.value)" [(ngModel)]="segment_value">
+      <ion-segment-button value="created">
+        <ion-label>Solicitados</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="in_progress">
+        <ion-label>En progreso</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="finalized">
+        <ion-label>Finalizados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header-->
+
+<!--ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-card mode="md" *ngFor="let item of list">
+            <ion-card-header class="request-card-header" (click)="viewRequest (item?.dataGeneral)">
+              <ion-card-title class="request.title">{{ item?.dataGeneral.title }}</ion-card-title>
+              <ion-item lines="none" no-padding no-margin>
+                {{ getRelativeDateTime (item?.dataGeneral.created_date) }}
+                <ion-badge class="request-badge-margin" color="orange">{{ item?.dataGeneral.service_name }}</ion-badge>
+              </ion-item>
+            </ion-card-header>
+            <hr class="card-separator">
+            <ion-item lines="none">
+              Postulantes
+              <ion-badge class="request-badge-margin" *ngIf="item.postulants > 0" color="danger">
+                {{ item.postulants }}
+              </ion-badge>
+
+              <ion-badge class="request-badge-margin" *ngIf="!item.postulants > 0" color="danger">
+                0
+              </ion-badge>
+
+              <ion-button expand="block" *ngIf="item?.dataGeneral.state === 'in_progress'" slot="end" color="danger" (click)="qualifyConfirm (item?.dataGeneral)">
+                Finalizar
+              </ion-button>
+              <ion-button expand="block" *ngIf="item?.dataGeneral.state !== 'in_progress'" fill="outline" slot="end" color="dark" (click)="viewRequest (item?.dataGeneral)">
+                Ver
+              </ion-button>
+            </ion-item>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+</ion-content-->

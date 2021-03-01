@@ -1,0 +1,399 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides class="hexpand" [options]="slideOpts" (ionSlideDidChange)="ionSlideDidChange ()">
+    <ion-slide>
+      <div>
+        <img class="logo-size" src="assets/img/SoyPro.svg">
+      </div>
+
+      <div padding>
+        <p class="text-gray">La única plataforma que permite que los mejores profesionales se destaquen</p>
+      </div>
+
+      <div>
+        <img class="width-80" src="assets/img/slide_soypro_01_02.png">
+      </div>
+
+      <ion-item text-center lines="none" margin-top>
+        <ion-label>
+          <h1 class="text-gray">¡Bienvenido!</h1>
+        </ion-label>
+      </ion-item>
+
+      <div class="position-bottom">
+        <ion-card class="position-bottom-card" text-center (click)="goNextSlide ()">
+          <ion-item lines="none" text-center>
+            <ion-label>
+              Empecemos >
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <img class="logo-size" src="assets/img/SoyPro.svg">
+      </div>
+
+      <div padding>
+        <h6 no-margin><b>¿Porqué ser pro?</b></h6>
+      </div>
+
+      <div padding>
+        <ion-list>
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (1)">
+            <ion-icon [ngStyle]="{'transform': b_1 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Mas trabajo
+          </ion-item>
+
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_1" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (2)">
+            <ion-icon [ngStyle]="{'transform': b_2 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Mayor Competencia
+          </ion-item>
+  
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_2" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (3)">
+            <ion-icon [ngStyle]="{'transform': b_3 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Otra ventaja mas
+          </ion-item>
+  
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_3" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (4)">
+            <ion-icon [ngStyle]="{'transform': b_4 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Por eso tambien
+          </ion-item>
+  
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_4" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (5)">
+            <ion-icon [ngStyle]="{'transform': b_5 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Otra ventaja mas
+          </ion-item>
+  
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_5" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+
+          <ion-item class="text-green" size="small" fill="clear" expand="block" (click)="show (6)">
+            <ion-icon [ngStyle]="{'transform': b_6 ? 'rotate(-45deg)' : 'none' }" name="remove" class="margin-right-1rem transition"></ion-icon>
+            Por eso tambien
+          </ion-item>
+  
+          <ion-item class="text-green padding-12px" lines="none" *ngIf="b_6" [@animation-top]>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam asperiores, error iure, enim velit voluptatibus distinctio magni nam voluptatem veniam nobis consequatur quisquam nulla at illum consectetur, eaque dignissimos nemo?
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="position-bottom">
+        <ion-card class="position-bottom-card" text-center (click)="goNextSlide ()">
+          <ion-item lines="none" text-center>
+            <ion-label>
+              ¡Quiero ser Pro! >
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <img class="logo-size" src="assets/img/SoyPro.svg">
+      </div>
+    
+      <div padding>
+        <h6 no-margin><b>Requisitos</b></h6>
+        <p text-wrap class="text-green font-size-14 no-margin-bottom">
+          Por motivos de seguridad y para poder asegurar la calidad del servicio, PuntoPro acepta únicamente profesionales formales que cuenten con lo siguiente:
+        </p>
+      </div>
+
+      <div>
+        <ion-list>
+          <ion-item class="text-green">
+            <ion-icon class="margin-right-1rem" name="remove"></ion-icon>
+            DNi o Carnet de extranjería
+          </ion-item>
+
+          <ion-item class="text-green">
+            <ion-icon class="margin-right-1rem" name="remove"></ion-icon>
+            Ruc
+          </ion-item>
+
+          <ion-item class="text-green">
+            <ion-icon class="margin-right-1rem" name="remove"></ion-icon>
+            validación de numero telefonico
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div padding>
+        <h6 no-margin><b>Opcional</b></h6>
+        <p text-wrap class="text-green font-size-14 no-margin-bottom">
+          Puntopro promueve los mejores, los más honrados y honestos profesionales. Aquellos que nos entreguen la siguiente documentación serán reconocidos y promovidos.
+        </p>
+      </div>
+
+      <div>
+        <ion-list>
+          <ion-item class="text-green">
+            <ion-icon class="margin-right-1rem" name="remove"></ion-icon>
+            Antecedentes policiales  
+          </ion-item>
+
+          <ion-item class="text-green">
+            <ion-icon class="margin-right-1rem" name="remove"></ion-icon>
+            Por eso también
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="position-bottom">
+        <ion-card class="position-bottom-card" text-center (click)="goNextSlide ()">
+          <ion-item lines="none" text-center>
+            <ion-label>
+              ¡Entendido!
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <img class="logo-size" src="assets/img/SoyPro.svg">
+      </div>
+    
+      <div padding>
+        <h6 no-margin><b>Permisos</b></h6>
+        <p text-wrap class="text-green font-size-14 no-margin-bottom">
+          Esta aplicación usa los servicios de ubicación del GPS para re potenciar tu perfil profesional y conseguirte mayores oportunidades de trabajo.
+        </p>
+      </div>
+
+      <div padding-top>
+        <img class="width-128px" src="assets/img/slide_soypro_02.png">
+      </div>
+
+      <ion-item text-center lines="none">
+        <ion-label>
+          <h1 class="text-green">¿Quieres que te encuentren?</h1>
+        </ion-label>
+      </ion-item>
+
+      <div class="position-bottom">
+        <ion-card class="position-bottom-card" text-center (click)="checkPhoneNumberIsValid ()">
+          <ion-item lines="none" text-center> 
+            <ion-label>
+              Acepto
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <!--ion-slides class="hexpand" [options]="slideOpts" (ionSlideDidChange)="ionSlideDidChange ()">
+    <ion-slide>
+      <div padding>
+        <img class="logo-size" src="assets/img/PuntoPro.png">
+      </div>
+
+      <div>
+        <img class="width-80" src="assets/img/slide_soypro_01_01.svg">
+      </div>
+
+      <div>
+        <img class="width-80" src="assets/img/slide_soypro_01_02.png">
+      </div>
+      <br>
+      <h2 class="text-green">Te damos la bienvenida</h2>
+
+      <ion-row class="position-bottom" style="background-color: #4B99FF;">
+        <ion-col size="6">
+          <ion-button fill="clear" color="light" (click)="goHome ()">
+            <ion-icon slot="start" name="arrow-back"></ion-icon>
+            Atras
+          </ion-button>
+        </ion-col>
+         <ion-col size="6">
+           <ion-button fill="clear" color="light" (click)="goNextSlide ()">
+            Adelante
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+    <ion-slide style="background-color: #F49500;">
+      <div>
+        <h2 class="text-white">¿Porqué PuntoPro?</h2>
+        <p class="text-white"><b>Beneficios para ti</b></p>
+
+        <div class="text-white" (click)="showBenefit (1)">
+          <h4><b>Mas trabajo</b></h4>
+          <p class="div-selected" padding *ngIf="b_1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <div class="text-white" (click)="showBenefit (2)">
+          <h4><b>Menos conpetencia</b></h4>
+          <p class="div-selected" padding *ngIf="b_2">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <div class="text-white" (click)="showBenefit (3)">
+          <h4><b>Tarjeta de credito</b></h4>
+          <p class="div-selected" padding *ngIf="b_3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <div class="text-white" (click)="showBenefit (4)">      
+          <h4><b>Menos conpetencia</b></h4>
+          <p class="div-selected" padding *ngIf="b_4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <div class="text-white" (click)="showBenefit (5)">        
+          <h4><b>Mas trabajo</b></h4>
+          <p class="div-selected" padding *ngIf="b_5">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <div class="text-white" (click)="showBenefit (6)">        
+          <h4><b>Tarjeta de credito</b></h4>
+          <p class="div-selected" padding *ngIf="b_6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+          </p>
+        </div>
+
+        <ion-row class="position-bottom" style="background-color: #FFAB08;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goNextSlide ()">
+              Adelante
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+    
+    <ion-slide style="background-color: #2E84FD;">
+      <div class="text-white">
+        <h2>Requisitos</h2>
+        <p padding text-wrap>
+          Por motivos de <b>seguridad</b> y para asegurar un <b>servicio de calidad.</b>
+          PuntoPro acepta unicamnente profesionales que cuenten con lo siguiente.
+        </p>
+
+        <h4 no-margin><b>DNI o Carnet de extranjeria</b></h4>
+        <p no-margin text-wrap>(Verificamos personas reales)</p>
+
+        <h4 no-margin margin-top><b>RUC</b></h4>
+        <p no-margin text-wrap>(Unicamente negocios formales)</p>
+
+        <h4 no-margin margin-top><b>Validacion de numero telefonico</b></h4>
+        <p no-margin text-wrap>(A travez de la aplicacion)</p>
+
+        <h4 no-margin margin-top><b>Antecedentes policiales</b></h4>
+        <p no-margin text-wrap>
+          (Si quieres recibir nuestro check y aparecer entre los recomendados)
+        </p>
+
+        <div text-center>
+          <img *ngIf="checkDisplaySize ()" class="width-70 image-bottom" src="assets/img/slide_soypro_03.png">
+        </div>
+
+        <ion-row class="position-bottom" style="background-color: #4B99FF;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goNextSlide ()">
+              Adelante
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background-color: #039D4F;">
+      <div class="text-white">
+        <h2>GPS y Geolocalizacion</h2>
+        <p padding text-wrap>
+          Esta aplicacion usa la ubicacion del GPS para repotenciar
+          tu perfil profesional y conseguirte mayor oportunidades de trabajo. 
+          Siguiendo das tu concentimiento...
+        </p>
+
+        <img src="assets/img/slide_03.svg">
+
+        <ion-row class="position-bottom" style="background-color: #14AA4F;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="checkPhoneNumberIsValid ()">
+              Comenzar
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+  </ion-slides-->
+</ion-content>

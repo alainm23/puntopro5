@@ -1,0 +1,50 @@
+<ion-content>
+  <h2 margin-top text-center class="text-white">Vendemos por los ojos</h2>
+  
+  <div padding text-center class="text-white">
+    <p text-wrap >
+      <b>{{ user_data?.first_name }}</b>, no te quedes atras, agrega una imagen a tu servicio y incrementa tu creadibilidad y tus ventas. Pudes subir una imagen desde tu celular, o toma un ahora
+    </p>      
+  </div>
+
+  <div *ngIf="image === ''" text-center margin>
+    <img class="add-image" src="/assets/img/add_image.png">
+  </div>
+
+  <div *ngIf="image !== ''" text-center margin>
+    <img class="image_preview" [src]="image">
+  </div>
+
+  <div *ngIf="image !== ''" text-center margin>
+    <p class="text-danger" (click)="clearImage ()"><small>Eliminar imagen</small></p>
+  </div>
+
+  <div *ngIf="image === ''" text-center margin>
+    <ion-button fill="clear" color="light" (click)="onSubmit ()">
+      <ion-icon slot="start" name="close-circle"></ion-icon>
+      Omitir este paso
+    </ion-button>
+  </div>
+
+  <div *ngIf="image !== ''" text-center margin>
+    <ion-button color="light" fill="outline" shape="round" (click)="onSubmit ()">
+      Seguir
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="6" style="background-color: #0099ab;">
+      <ion-button expand="block" fill="clear" color="light" (click)="takePicture ()">
+        Tomar foto
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="6" style="background-color: #00DDF2;">
+      <ion-button expand="block" fill="clear" color="light" (click)="selectPicture ()">
+        Escoger de galeria
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

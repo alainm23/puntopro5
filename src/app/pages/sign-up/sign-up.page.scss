@@ -1,0 +1,27 @@
+.logo-size {
+  width: 7rem;
+}
+
+ion-content {
+  --background: none;
+  background-image: url('/assets/img/background-login.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.entry ion-icon {
+  color: #fff;
+}
+
+.entry {
+  --border-radius: 4px;
+  --background: #00000057;
+  --color: #fff;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.action-css {
+  padding: 0.6rem;
+}

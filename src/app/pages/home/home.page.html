@@ -1,0 +1,308 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+    
+    <ion-buttons slot="end" *ngIf="auth.user_data?.is_pro === true" (click)="goPanelPro ()">
+      <ion-button class="no-transform" color="violet">
+        Panel Pro >
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="visible_test" [@animation-top]>
+    <ion-row padding>
+      <ion-col size="12" text-center>
+        <ion-badge class="count" [color]="button_01_color">
+          1
+        </ion-badge>
+
+        <div class="line inline-block"></div>
+        
+        <ion-badge class="count" *ngIf="has_services" [color]="button_02_color">
+          {{ number_02_text }}
+        </ion-badge>
+        
+        <div *ngIf="has_services" class="line inline-block"></div>
+        
+        <ion-badge class="count" [color]="button_03_color">
+          {{ number_03_text }}
+        </ion-badge>
+
+        <div class="line inline-block"></div>
+
+        <ion-badge class="count" [color]="button_04_color">
+          {{ number_04_text }}
+        </ion-badge>
+      </ion-col>  
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="{ 'image-background': active_index === 0 }">
+  <ion-slides [options]="slideOpts" class="hexpand" (ionSlideDidChange)="ionSlideDidChange ()">
+    <ion-slide class="inline-block width-100">
+      <!--ion-item lines="none" text-center [hidden]="keyboard.isVisible"-->
+      <ion-item lines="none" text-center>
+        <ion-label>
+          <h2><b>Hola {{ auth.user_data?.first_name }}</b></h2>
+          <p class="subtitle">¿En qué te podemos ayudar hoy?</p>
+        </ion-label>
+      </ion-item>
+      
+      <div text-center margin-top *ngIf="is_loading === true">
+        <ion-spinner name="bubbles">
+        </ion-spinner>
+      </div>
+      
+      <div class="padding-left-right">
+        <ion-searchbar 
+          mode="md"
+          *ngIf="is_loading === false"
+          class="searchbar-css"
+          [(ngModel)]="search_text" 
+          (ionInput)="filterSubCategories ($event)" 
+          placeholder="Busca un servicio o un profesional">
+        </ion-searchbar>
+      </div>
+      
+      <ion-card *ngIf="search_text.length > 2" margin class="card-search">
+        <ion-content class="height-16rem">
+          <ion-list>
+            <ion-list-header *ngIf="service_items.length > 0">
+              Servicios
+            </ion-list-header>
+
+            <ion-item *ngFor="let item of service_items" lines="none" (click)="subCategorySelected (item)"> 
+              <ion-icon class="icon-search" slot="start" name="baseball"></ion-icon>
+              {{ item.primary_text }}
+            </ion-item>
+            
+            
+            <ion-list-header *ngIf="user_items.length > 0"> 
+              Profesionales
+            </ion-list-header>
+
+            <ion-item *ngFor="let item of user_items" lines="none"  (click)="goProfile (item)">
+              <ion-avatar class="profile-avatar" slot="start">
+                <img [src]="item.avatar">
+              </ion-avatar>
+             <span slot="start">{{ item.primary_text }} {{ item.secondary_text }}</span>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-card>
+      
+      <div class="position-bottom padding-left-right" *ngIf="visible_test" [@animation-bottom]>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button color="green" expand="block" size="small">Tarifario</ion-button>
+          </ion-col>
+          
+          <ion-col size="6">
+            <ion-button color="green" expand="block" size="small" (click)="goCategories ()">Ver Categorias</ion-button>
+          </ion-col>
+        </ion-row>
+      
+        <ion-item lines="none" text-center class="item-css">
+          <ion-label>
+            <h2><b>¿Ya eres pro?</b></h2>
+          </ion-label>
+        </ion-item>
+      
+        <ion-card text-center class="panel-pro-card" (click)="goSoyProPresentation ()">
+          <ion-item lines="none" text-center>
+            <ion-label>
+              Inscríbete / Accede
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-slide>
+    
+    <ion-slide>
+      <div text-center>
+        <ion-button size="small" shape="round" color="orange" (click)="slidePrev ()">
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          {{ request_data.name }}
+        </ion-button>
+      </div>
+      
+      <ion-item lines="none" text-center>
+        <ion-label>
+          <p>Seleccione un servicio</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-list>
+        <ion-radio-group (ionChange)="serviceChanged ()" [(ngModel)]="service_selected">
+          <div *ngFor="let item of services">
+            <ion-item>
+              <ion-radio class="radio-right" slot="start" [value]="item.dataGeneral"></ion-radio>
+              {{ item.dataGeneral.name }}
+            </ion-item>
+
+            <div class="des-right" *ngIf="service_selected === item.dataGeneral">
+              <p text-wrap class="des-margin-top">Esta es una descriocion xdxd</p>
+            </div>
+          </div>
+        </ion-radio-group>
+      </ion-list>
+
+      <div class="position-bottom" text-center>
+        <ion-button
+          (click)="selectAddress ()"
+          color="orange" 
+          [disabled]="request_data.id === '' || request_data.id === null || request_data.id === undefined"
+          class="c-button">
+          Continuar
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div text-center>
+        <ion-button size="small" shape="round" color="orange" (click)="slidePrev ()">
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          {{ request_data.name }}
+        </ion-button>
+      </div>
+
+      <ion-item lines="none" text-center>
+        <ion-label>
+          <p>¿Dónde lo necesitas?</p>
+        </ion-label>
+      </ion-item>
+
+      <div class="padding-left-right">
+        <ion-searchbar
+          style="height: 10%"
+          class="searchbar-padding searchbar-css"
+          #searchbar
+          [(ngModel)]="request_data.address_name"
+          placeholder="Ingrese una dirección...">
+        </ion-searchbar>
+      </div>
+
+      <ion-row style="height: 7%" class="padding-left-right">
+        <ion-col size="6">
+          <p class="p-left p-no-margin" text-left (click)="goCurrentPosition ()">
+            <small>
+              Mi ubicacion actual
+            </small>
+          </p>
+        </ion-col>
+
+        <ion-col size="6">
+          <p class="p-right p-no-margin" text-right (click)="openSearchLocations ()">
+            <small>
+              Mis ubicaciones
+            </small>
+          </p>
+        </ion-col>
+      </ion-row>
+
+      <div class="map-class">
+        <div #map id="map"></div>
+      </div>
+
+      <div text-center class="address_button">
+        <ion-button
+          [disabled]="request_data.address_name === ''" 
+          color="orange" 
+          class="c-button" 
+          (click)="completeData ()">
+          Continuar
+        </ion-button>
+
+        <p text-wrap class="p-margin-top p-message">
+          Su dirección no sera publicada, solo se usará como referencia de zona para los profesionales             
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-content>
+        <div text-center>
+          <ion-button size="small" shape="round" color="orange" (click)="slidePrev ()">
+            <ion-icon slot="start" name="close-circle"></ion-icon>
+            {{ request_data.name }}
+          </ion-button>
+        </div>
+            
+        <ion-item lines="none" text-center>
+          <ion-label>
+            <p>Completa los datos</p>
+          </ion-label>
+        </ion-item>
+  
+        <div class="detail-padding">
+          <ion-item lines="none">
+            <ion-label>
+              <p>{{ request_data?.name }}</p>
+              <p>{{ request_data?.service_name }}</p>
+              <p padding-bottom>
+                {{ request_data?.address_name }}
+              </p>
+              <p class="p-message" text-wrap>
+                * Su dirección no sera publicada, solo se usará como referencia de zona para los profesionales
+              </p>
+            </ion-label>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-textarea
+              [(ngModel)]="request_data.note" 
+              class="widget-textarea"  
+              rows=4
+              placeholder="Describe el trabajo requerido">
+            </ion-textarea>
+          </ion-item>
+  
+          <ion-item
+            *ngIf="request_data.images.length < max_images" 
+            lines="none" 
+            (click)="selectImageSource ()">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            <span slot="start">Agrega una imagen</span>
+          </ion-item>
+  
+          <ion-list>
+            <ion-item *ngFor="let item of request_data.images">
+              <ion-thumbnail slot="start">
+                <img [src]="item">
+              </ion-thumbnail>
+  
+              <ion-button
+                (click)="deleteImage (item)" 
+                color="danger" 
+                fill="outline" 
+                slot="end">
+                Eliminar
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer *ngIf="footer_visible" no-border transparent>
+  <ion-toolbar no-border *ngIf="active_index === 3">
+    <div text-center>
+      <ion-button
+        [disabled]="request_data.note === ''"
+        color="orange" 
+        class="c-button" 
+        (click)="goRequest ()">
+        Solicitar
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,74 @@
+<ion-app>
+  <ion-menu side="start" type="overlay" contentId="menu-content">
+    <!--ion-header>
+        <ion-toolbar md="ios">
+          <ion-title text-center class="padding-3px">
+            <img class="size-64" src="/assets/img/PuntoPro.png">
+          </ion-title>
+        </ion-toolbar>
+      </ion-header-->
+    <ion-content class="background-menu">
+      <div text-center class="avatar-menu">
+        <img *ngIf="auth._authState?.isAnonymous === false" class="avatar" [src]="auth.user_data?.avatar"/>
+        <img *ngIf="auth._authState?.isAnonymous === true" class="avatar" src="https://cdn.wallpapersafari.com/23/99/uOxbvU.jpg"/>
+      </div>
+
+      <ion-item text-center lines="none">
+        <ion-label *ngIf="auth._authState?.isAnonymous === false">
+          <h2><b>{{ auth.user_data?.first_name }}</b></h2>
+        </ion-label>
+        <ion-label *ngIf="auth._authState?.isAnonymous === true">
+          Anonymous
+        </ion-label>
+      </ion-item>
+
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngIf="auth._authState?.isAnonymous === false">
+            <ion-item (click)="goProfileEdit ()">Mi Perfil</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item>Todas las categorias</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="auth._authState?.isAnonymous === false">
+            <ion-item (click)="goMessagesPage ()">Inbox</ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false" *ngIf="auth._authState?.isAnonymous === false">
+            <ion-item (click)="goRequestHistory ()">Historial de solicitudes</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item>Consultar tarifario</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="auth._authState?.isAnonymous === false">
+            <ion-item (click)="goFavorites ()">Mis favoritos</ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="showTutorial ()">Ver tutorial</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item>Blog</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item>Acerca de la aplicacion</ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="auth._authState?.isAnonymous === false">
+            <ion-item (click)="signOut ()">Cerrar sesion</ion-item>
+          </ion-menu-toggle>
+
+          <!--ion-menu-toggle auto-hide="false" *ngIf="auth.user_data?.is_pro === false">
+            <ion-item (click)="goSoyProPresentation ()">Quiero ser Pro</ion-item>
+          </ion-menu-toggle-->
+        </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-app>

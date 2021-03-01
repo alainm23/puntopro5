@@ -1,0 +1,101 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-left padding-right>
+  <div padding text-center>
+    <img class="logo-size" src="assets/img/image-login.png">
+  </div>
+
+  <div text-center>
+    <p class="text-white"><i>Formulario de registro</i></p>
+  </div>
+
+  <form [formGroup]="form">
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="person"></ion-icon>
+      <ion-input formControlName="first_name" type="text" placeholder="Nombre completo" clearInput=true></ion-input>
+    </ion-item> 
+
+    <div *ngIf="form.controls.first_name.errors?.required && form.controls.first_name.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="person"></ion-icon>
+      <ion-input formControlName="last_name" type="text" placeholder="Apellidos" clearInput=true></ion-input>
+    </ion-item> 
+
+    <div *ngIf="form.controls.last_name.errors?.required && form.controls.last_name.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input formControlName="email" type="text" placeholder="Correo electrónico" clearInput=true></ion-input>
+    </ion-item> 
+
+    <div *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input formControlName="confirmar_email" type="text" placeholder="Correo electrónico" clearInput=true></ion-input>
+    </ion-item>
+    
+    <div *ngIf="form.controls.confirmar_email.errors?.required && form.controls.confirmar_email.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <div *ngIf="form.controls.confirmar_email.errors?.equalTo && form.controls.confirmar_email.dirty">
+      <small class="text-white margin-left-1">* Los correos electronicos no coinciden</small>
+    </div>
+
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="lock"></ion-icon>
+      <ion-input formControlName="password" type="password" placeholder="********" clearInput=true></ion-input>
+    </ion-item>
+
+    <div *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <ion-item margin-top lines="none" class="entry">
+      <ion-icon slot="start" name="lock"></ion-icon>
+      <ion-input formControlName="confirmar_password" type="password" placeholder="********" clearInput=true></ion-input>
+    </ion-item>
+
+    <div *ngIf="form.controls.confirmar_password.errors?.required && form.controls.confirmar_password.dirty">
+      <small class="text-white margin-left-1">* Este campo es necesario</small>
+    </div>
+
+    <div *ngIf="form.controls.confirmar_password.errors?.equalTo && form.controls.confirmar_password.dirty">
+      <small class="text-white margin-left-1">* Las contraseñas no coinciden</small>
+    </div>
+
+    <ion-row class="action-css">
+      <ion-col size="8">
+        <ion-button color="violet" expand="block" [disabled]="!form.valid" (click)="onSubmit ()">
+          CONECTAR
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="2">
+        <ion-button color="violet" expand="block" (click)="facebook ()">
+          <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="2">
+        <ion-button color="violet" expand="block" (click)="google ()">
+          <ion-icon slot="icon-only" name="logo-google"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

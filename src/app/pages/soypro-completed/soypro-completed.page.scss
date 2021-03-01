@@ -1,0 +1,46 @@
+ion-content {
+    --background: none;
+    background-image: url('/assets/img/soypro-completed.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.position-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 3rem;
+}
+
+.position-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.padding-left-right {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 0px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.panel-pro-card {
+    width: 100%;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.valign-center {
+    position: fixed;
+    top: 30%;
+    margin: 0 atu;
+    margin: 0 auto;
+    width: 100%;
+}

@@ -1,0 +1,110 @@
+<ion-header  no-border>
+  <ion-toolbar mode="ios"  no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item text-center lines="none">
+            <ion-label>
+              <h2 class="font-bold">Hola {{ request?.client_name }}</h2>
+              <p>Detalle de solicitud</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-row>
+            <ion-col size="6">
+              <ion-thumbnail>
+                <img src="https://www.nasa.gov/images/content/98619main_0204flare_xray_red_m.jpg">
+              </ion-thumbnail>
+            </ion-col>
+
+            <ion-col size="6">
+              <p class="font-bold p-header">Profesional a cargo</p>
+              <p text-wrap class="p-detail">{{ request?.client_name }}</p>
+              <p text-wrap class="font-bold p-header">{{ request?.service_name }}</p>
+              <p *ngIf="request?.is_emergency === true" class="p-detail">Emergencia</p>
+              <p *ngIf="request?.is_emergency === false" class="p-detail">Cotizacion</p>
+
+              <p class="p-detail" text-wrap>{{ request?.address_name }}</p>
+            </ion-col>
+
+            <ion-col size="12">
+              <p class="p-detail detail" text-wrap>{{ request?.note }}</p>
+            </ion-col>
+          </ion-row> 
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item text-center lines="none">
+            <ion-label>
+              Postulantes
+            </ion-label>
+          </ion-item>
+
+          <ion-list>
+            <ion-item *ngFor="let item of postulants" (click)="goProfile (item)">
+              <ion-avatar slot="start">
+                <img class="avatar-postulante" [src]="item?.pro_avatar"/>
+              </ion-avatar>
+              
+              <ion-label>
+                <h3>{{ item?.pro_fullname }}</h3>
+                <p>Diseñador web</p>
+              </ion-label>
+
+              <ion-button slot="end" fill="clear" color="dark">
+                <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  <!--ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card text-wrap>
+          <ion-item>
+            <p>{{ request?.client_name }} necesita {{ request?.service_name }} en {{ request?.address_name }}</p>
+          </ion-item>
+        </ion-card>
+        
+        <ion-list>
+          <ion-list-header>
+            Postulantes
+          </ion-list-header>    
+          <div *ngFor="let item of postulants">
+            <ion-item (click)="goProfile (item)">
+              <ion-avatar slot="start">
+                <img [src]="item?.pro_avatar"/>
+              </ion-avatar>
+              <ion-label>
+                <h2 text-wrap>{{ item?.pro_fullname }}</h2>
+                <p>{{ item?.distance }} Km.</p>
+                <!--h3 text-wrap>
+                  Cobraria entre {{ item?.min_price }} y {{ item?.max_price }} soles <p (click)="showMessage (item)" class="more">ver mas ...</p></h3>
+                <p text-wrap>
+                  {{ item?.message }}
+                </p>
+              </ion-label>
+
+              <ion-button slot="end" fill="outline" color="dark">Ver perfil</ion-button>
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid-->
+</ion-content>

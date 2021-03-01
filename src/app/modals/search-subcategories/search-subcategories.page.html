@@ -1,0 +1,28 @@
+<ion-header no-border>
+  <ion-toolbar no-border>
+    <ion-searchbar mode="ios" (ionInput)="updateSearch($event)" placeholder="Necesito un ..." animated="true"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal ()">
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="is_loading === false" class="margin-right-1">
+    <ion-list-header>
+      <ion-label>Sugeridos</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let item of list" (click)="select (item)">
+      <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+      {{ item?.name }}
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,103 @@
+<ion-content>
+  <ion-slides class="hexpand" [options]="slideOpts" (ionSlideDidChange)="ionSlideDidChange ()">
+    <ion-slide style="background-color: #f49500;">
+      <div>
+        <h1 class="text-white">Los mejores profesionales</h1>
+        <p padding class="text-white" text-wrap>Consigue el profesional que necesitas con total facilidad, y todos estan en la palma de tus manos las 24 horas del dia.</p>
+        <img src="assets/img/slide_01.svg">
+
+        <ion-row class="position-bottom" style="background-color: #FFAE00;">
+          <ion-col size="6">
+            
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goNextSlide()">
+              Adelante
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background-color: #00BBD8;">
+      <div>
+        <h1 class="text-white">Hazte conocer</h1>
+        <p padding class="text-white" text-wrap>Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit, sed diam nonuadipiscing elit, sed
+        diam nonummy nibh euismod</p>
+        <img src="assets/img/slide_02.svg">
+
+        <ion-row class="position-bottom" style="background-color: #00DDF2;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goNextSlide ()">
+              Adelante
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+    
+    <ion-slide style="background-color: #039C4F;">
+      <div>
+        <h1 class="text-white">GPS y Geolocalizacion</h1>
+        <p padding class="text-white" text-wrap>Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit, sed diam nonuadipiscing elit, sed
+        diam nonummy nibh euismod</p>
+        <img class="size-80" src="assets/img/slide_03.svg">
+        <p margin-bottom class="text-white" (click)="omitir ()">Omitir paso</p>
+
+        <ion-row class="position-bottom" style="background-color: #00B853;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="checkGPSPermission ()">
+              {{ slide_03_button_text }}
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background-color: #5180FF;">
+      <div>
+        <h1 class="text-white">Ya estamos listos</h1>
+        <p padding class="text-white" text-wrap>Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit, sed diam nonuadipiscing elit, sed
+        diam nonummy nibh euismod</p>
+        <img src="assets/img/slide_04.svg">
+
+        <ion-row class="position-bottom" style="background-color: #4B99FF;">
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goPrevSlide ()">
+              <ion-icon slot="start" name="arrow-back"></ion-icon>
+              Atras
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button fill="clear" color="light" (click)="goLogin ()">
+              Comenzar
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

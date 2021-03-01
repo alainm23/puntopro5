@@ -1,0 +1,36 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item text-center lines="none">
+    <ion-label>
+      <h2 text-wrap>CONFIGURANDO MIS SERVICIOS</h2>
+      <p text-wrap>Seleccione una <b>categoría</b> y <b>sub categoría</b> para empezar a trabajar</p>
+    </ion-label>
+  </ion-item>
+    
+  <ion-list>
+    <div *ngFor="let item of categories" (click)="showSubCategories (item)">
+      <ion-item>
+        <ion-icon class="transition margin-right-6px" [ngStyle]="{'transform': item?.show_subcategories ? 'rotate(90deg)' : 'none' }"name="arrow-dropright"></ion-icon>
+        {{ item?.data.name }}
+      </ion-item>
+
+      <ion-list class="margin-left-24" *ngIf="item?.show_subcategories" [@animation-top]>
+        <ion-item *ngFor="let item of item?.SubCategories" (click)="selectService (item?.dataGeneral)">
+          <ion-icon class="margin-right-6px font-size-12" name="radio-button-off"></ion-icon>
+          {{ item?.dataGeneral.name }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-list>
+</ion-content>

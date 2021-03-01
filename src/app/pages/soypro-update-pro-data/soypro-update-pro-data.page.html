@@ -1,0 +1,214 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <div text-center>
+        <img class="avatar avatar-card" [src]="auth.user_data?.avatar"/>
+      </div>
+
+      <ion-item text-center lines="none">
+        <ion-label>
+          <h2><b>{{ auth.user_data?.first_name }} {{ auth.user_data?.last_name }}</b></h2>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="12">
+      <form [formGroup]="form">
+        <ion-card class="card">
+          <ion-card-header mode="md" text-center>
+            <ion-card-title class="text-gray" text-center>Datos profesionales</ion-card-title>
+          </ion-card-header>
+
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-input formControlName="razon_social" placeholder="Razón social"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-input formControlName="ruc" placeholder="Numero RUC/RUS"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-input formControlName="address" placeholder="Dirección"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-input formControlName="business_mail" placeholder="Correo electrónico empresarial"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-select class="select-item" interface="popover" placeholder="Grado de instrucción" formControlName="institutional_grade">
+                  <ion-select-option value="01">Educacion primaria</ion-select-option>
+                  <ion-select-option value="02">Educacion segundaria</ion-select-option>
+                  <ion-select-option value="03">Educacion superior</ion-select-option>
+                  <ion-select-option value="04">Educacion tecnica</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-input formControlName="degree" placeholder="Titulo"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </form>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-card class="card">
+        <ion-card-header mode="md" text-center>
+          <ion-card-title class="text-gray" text-center>Horarios de atención</ion-card-title>
+        </ion-card-header>
+
+        <ion-row *ngFor="let item of work_schedules">
+          <ion-col size="4">
+            <ion-item>
+              <ion-select class="select-item" interface="popover" placeholder="Lunes - Viernes" [(ngModel)]="item.days">
+                <ion-select-option value="01">Lunes - Viernes</ion-select-option>
+                <ion-select-option value="02">Sabado - Domingo</ion-select-option>
+                <ion-select-option value="03">Lunes</ion-select-option>
+                <ion-select-option value="04">Martes</ion-select-option>
+                <ion-select-option value="05">Miercoles</ion-select-option>
+                <ion-select-option value="06">Jueves</ion-select-option>
+                <ion-select-option value="07">Viernes</ion-select-option>
+                <ion-select-option value="08">Sabado</ion-select-option>
+                <ion-select-option value="09">Domingo</ion-select-option>
+                <ion-select-option value="10">Feriados</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="3">
+            <ion-item>
+              <ion-input [(ngModel)]="item.open" placeholder="08:00"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="3">
+            <ion-item>
+              <ion-input [(ngModel)]="item.close" placeholder="17:00"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="2" align-self-center>
+            <ion-button size="small" fill="clear" color="dark" (click)="removeHour (item)">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none" (click)="addHours ()">
+              <ion-icon class="text-gray" name="add"></ion-icon>
+              <span class="text-gray">Agregar regla</span>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-card class="card">
+        <ion-card-header mode="md" text-center>
+          <ion-card-title class="text-gray" text-center>Zona de atención</ion-card-title>
+        </ion-card-header>
+
+        <ion-list>
+          <ion-item *ngFor="let item of work_areas">
+            <ion-label text-wrap>
+              <ion-text>
+                <h3><b>{{ item.zona }}</b></h3>
+              </ion-text>
+              <p>{{ item.des }}</p>
+            </ion-label>
+
+            <ion-button slot="end" fill="clear" size="small" color="dark" (click)="removeZone (item)">
+              <ion-icon slot="icon-only"name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+        
+        <ion-item lines="none" (click)="addZone ()">
+          <ion-icon class="text-gray" name="add"></ion-icon>
+          <span class="text-gray">Agregar zona</span>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-card class="card">
+        <ion-card-header mode="md" text-center>
+          <ion-card-title class="text-gray" text-center>Métodos de pago</ion-card-title>
+        </ion-card-header>
+
+        <ion-row *ngFor="let item of payment_methods">
+          <ion-col size="10">
+            <ion-item lines="none">
+              <ion-select class="select-item" interface="popover" placeholder="Metodo de pago" [(ngModel)]="item.tipo">
+                <ion-select-option value="01">Tarjeta de credito / debito</ion-select-option>
+                <ion-select-option value="02">Efectivo</ion-select-option>
+                <ion-select-option value="03">Cheque</ion-select-option>
+                <ion-select-option value="04">Trasnferencia</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="2">
+            <ion-button fill="clear" size="small" color="dark" (click)="removePago (item)">
+              <ion-icon slot="icon-only"name="close"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item lines="none" (click)="addMPago ()">
+          <ion-icon class="text-gray" name="add"></ion-icon>
+          <span class="text-gray">Agregar nuevo</span>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
+
+<ion-footer no-border>
+<ion-toolbar no-border>
+  <ion-row>
+    <ion-col size="2">
+      <ion-button expand="block" color="green" (click)="goback ()" mode="md">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="10">
+      <ion-button expand="block" color="green" mode="md" [disabled]="!form.valid" (click)="submit ()">
+        Guardar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-toolbar>
+</ion-footer>

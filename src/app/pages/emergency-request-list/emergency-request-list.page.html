@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+      </ion-buttons>
+      
+      <ion-title>Solicitudes de emergencia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let item of items" (click)="goRequest (item?.dataGeneral)">
+            <ion-label>
+              <ion-text>
+                <h2>{{ item?.dataGeneral.subcategory_name }}</h2>
+              </ion-text>
+              <p>{{ item?.dataGeneral.address_name }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,42 @@
+.card-separator {
+  background-color: #00000047;
+}
+
+.request-card-header {
+  padding-bottom: 0px !important;
+}
+
+.request-badge-margin {
+  margin-left: 0.5rem;
+}
+
+.request.title {
+  font-size: 1.3rem;
+}
+
+ion-segment {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+ion-segment-button {
+  font-size: 12px;
+  text-transform: none;
+}
+
+ion-select {
+  max-width: 100%;
+  width: 100%;
+  margin: 2rem;
+  margin-top: 1rem;
+  padding-right: 9px;
+  border: 1px solid #000000c2;
+  border-radius: 6px;
+  margin-bottom: 0px;
+}
+
+ion-badge {
+  position: fixed;
+  bottom: 19px;
+  right: 19px;
+}

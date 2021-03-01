@@ -1,0 +1,64 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button class="no-transform" color="violet">
+        Panel Pro >
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false">
+    <ion-row>
+      <ion-col>
+        <ion-item text-center lines="none">
+          <ion-label>
+            <h1><b>Mis favoritos</b></h1>
+          </ion-label>
+        </ion-item>
+        <ion-list *ngIf="list.length > 0 === true">
+          <div *ngFor="let item of list">
+            <ion-item>
+              <ion-avatar slot="start" class="avatar" (click)="goProfile (item?.dataGeneral)">
+                <img [src]="item?.dataGeneral.avatar"/>
+              </ion-avatar>
+              <ion-label (click)="goProfile (item?.dataGeneral)">
+                <h2><b>{{ item?.dataGeneral.fullname }}</b></h2>
+                <h3>Diseñador web</h3>
+                <p>12.11. 2018 09:23</p>
+              </ion-label>
+
+              <ion-button slot="end" fill="clear" color="dark">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </div>
+        </ion-list>
+    
+        <ion-grid *ngIf="list.length > 0 === false">
+          <ion-row center>
+            <ion-col>
+              <h1>Ningun Favorito</h1>
+              <h4>...</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

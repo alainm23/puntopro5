@@ -1,0 +1,139 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img class="wordmark-size" src="/assets/img/PuntoPro-wordmark.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>  
+  <div margin text-center class="avatar-container">
+    <ion-button size="small" color="dark" class="overlay-button" (click)="selectImageSource ()">
+      <ion-icon slot="icon-only" name="md-camera"></ion-icon>
+    </ion-button>
+    <img id=imageid (click)="selectImageSource ()" class="image-avatar" [src]="avatar">
+  </div>
+
+  <ion-card *ngIf="need_photo" color="red">
+    <ion-item text-center>
+      <ion-label color="danger">Si eres humano, pon una foto</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <form [formGroup]="form">
+  <ion-card class="border-6 card-white">
+    <ion-card-header class="padding-bottom-0">
+      <ion-card-subtitle>Datos personales</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">RUC</ion-label>
+        <ion-input type="tel" placeholder="15878545896" clearInput=true formControlName="ruc" maxlength="11"></ion-input>
+      </ion-item>
+
+      <div *ngIf="form.controls.ruc.errors?.required && form.controls.ruc.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+
+      <div *ngIf="form.controls.ruc.errors?.number && form.controls.ruc.dirty">
+        <small class="text-danger margin-left-1">* Numero de RUC invalido, use solo numeros</small>
+      </div>
+
+      <div *ngIf="form.controls.ruc.errors?.minlength && form.controls.ruc.dirty">
+        <small class="text-danger margin-left-1">* Numero de RUC invalido, minimo 11 digitos</small>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Tipo de documento</ion-label>
+        <ion-select placeholder="Seleccione uno"interface="popover" formControlName="doc_type" (ngModelChange)="docTypeChange ($event)">
+          <ion-select-option value="DNI">DNI</ion-select-option>
+          <ion-select-option value="CE">CE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="form.controls.doc_type.errors?.required && form.controls.doc_type.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Numero de documento</ion-label>
+        <ion-input [type]="doc_type" [minlength]="doc_number_minlength" [maxlength]="doc_number_maxlength" placeholder="74233889" clearInput=true formControlName="doc_number"></ion-input>
+      </ion-item>
+
+      <div *ngIf="form.controls.doc_number.errors?.required && form.controls.doc_number.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div> 
+
+      <div *ngIf="form.controls.doc_number.errors?.minlength && form.controls.doc_number.dirty">
+        <small class="text-danger margin-left-1">* Numero de documento invalido, minimo {{ doc_number_minlength }} digitos</small>
+      </div>
+
+      <div *ngIf="form.controls.doc_number.errors?.number && form.controls.doc_number.dirty">
+        <small class="text-danger margin-left-1">* Numero de documento invalido, use solo numeros</small>
+      </div>
+    </ion-list>
+  </ion-card>
+
+  <ion-card class="border-6 card-white">
+    <ion-card-header class="padding-bottom-0">
+      <ion-card-subtitle>Datos profesionales</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Direccion</ion-label>
+        <ion-input type="text" placeholder="Avenida los Incas, Cusco" clearInput=true formControlName="address"></ion-input>
+      </ion-item> 
+
+      <div *ngIf="form.controls.address.errors?.required && form.controls.address.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-datetime placeholder="Seleccione una fecha" displayFormat="DD MMMM YYYY" picker-format="DD MMMM YYYY"
+          cancelText="Cancelar" doneText="Seleccionar"
+          monthNames="enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre"
+          formControlName="birth_date"></ion-datetime>
+      </ion-item>
+
+      <div *ngIf="form.controls.birth_date.errors?.required && form.controls.birth_date.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Genero</ion-label>
+        <ion-select placeholder="Seleccione uno" interface="popover" formControlName="gender">
+          <ion-select-option value="male">Masculino</ion-select-option>
+          <ion-select-option value="female">Femenino</ion-select-option>
+          <ion-select-option value="na">Prefiero no decirlo</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="form.controls.gender.errors?.required && form.controls.gender.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Descripcion <small> ({{ 300 - form.controls.profile_description.value.length }})</small></ion-label>
+        <ion-textarea maxlength="300" rows="4" placeholder="Soy un profesional ..." formControlName="profile_description"></ion-textarea>
+      </ion-item>
+
+      <div *ngIf="form.controls.profile_description.errors?.required && form.controls.profile_description.dirty">
+        <small class="text-danger margin-left-1">* Este campo es necesario</small>
+      </div>
+    </ion-list>
+  </ion-card>
+
+  <div text-center margin>
+    <ion-button color="dark" fill="outline" shape="round" (click)="onSubmit ()" [disabled]="!form.valid">
+      Seguir
+    </ion-button>
+  </div>
+  </form>
+</ion-content>

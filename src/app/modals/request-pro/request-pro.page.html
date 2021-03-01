@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="is_edit === false">Solicitud profesional</ion-title>
+    <ion-title *ngIf="is_edit === true">Editar solicitud profesional</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner color="light" name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card class="border-6" *ngIf="is_loading === false">
+    <ion-list>
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label position="stacked">Que necesitas</ion-label>
+          <ion-input type="text"placeholder="Describe tu necesidad ..." clearInput=true formControlName="title"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="is_edit === false">
+          <ion-label position="stacked">Servicio a solicitar</ion-label>
+          <ion-select placeholder="Seleccione uno" interface="popover"
+          formControlName="service">
+            <ion-select-option [value]="item?.dataGeneral" *ngFor="let item of services">
+              {{ item?.dataGeneral.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Detalle</ion-label>
+          <ion-textarea rows="4" placeholder="..." formControlName="detail"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Direccion</ion-label>
+          <ion-input type="text"placeholder="Lo necesito en ..." clearInput=true formControlName="address"></ion-input>
+        </ion-item>
+
+        <ion-list>
+          <ion-item-divider lines="none" color="white" class="border-bottom"><ion-label>
+            Imagenes
+          </ion-label></ion-item-divider>
+
+          <div>
+            <div *ngIf="is_edit === true">
+              <ion-item *ngFor="let item of images_edit">
+                <img class="size-32" slot="start" [src]="item.getDownloadURL | async">
+                <ion-icon slot="end" name="trash" (click)="deleteImageSource (item)"></ion-icon>
+              </ion-item>
+            </div>
+
+            <ion-item *ngFor="let item of images">
+              <img class="size-32" slot="start" [src]="item">
+              <ion-icon slot="end" name="trash" (click)="deleteImage (item)"></ion-icon>
+            </ion-item>
+          </div>
+
+          <ion-item lines="none" (click)="selectImageSource ()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Agregar imagen
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-list>
+  </ion-card>
+
+  <div text-center margin>
+    <ion-button *ngIf="is_edit === false" color="light" fill="outline" shape="round" [disabled]="!form.valid" (click)="onSubmit ()">
+      Solicitar
+    </ion-button>
+
+    <ion-button *ngIf="is_edit === true" color="light" fill="outline" shape="round" [disabled]="!form.valid" (click)="onSubmit ()">
+      Editar
+    </ion-button>
+  </div>
+</ion-content>

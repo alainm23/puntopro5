@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="ios-arrow-back" color="dark"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="is_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="is_loading === false">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-card *ngFor="let item of list" (click)="showOptions (item)">
+            <ion-card-header>
+              <ion-card-title>
+                {{ item.service_name }}
+              </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              {{ item.description }}
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-button expand="block" fill="outline" color="light" (click)="addService ()">
+      Agregar un nuevo servicio
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

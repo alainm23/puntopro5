@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="dark" (click)="closeModal ()">
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-item lines="none">
+      <ion-label class="no-margin" *ngIf="is_profile_loading === false">
+        <h2 class="font-bold">{{ profile?.fullname }}</h2>
+        <p *ngIf="type === 'pro'">Chat con usuario</p>
+        <p *ngIf="type !== 'pro'">Chat con profesional</p>
+      </ion-label>
+
+      <div *ngIf="is_profile_loading === true">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+    </ion-item>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="dark" (click)="presentPopover ($event)">
+        <ion-icon slot="icon-only" name="md-more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-top padding-bottom>
+  <ion-grid *ngIf="is_chats_loading === true" style="height: 100%; margin-bottom: 1rem">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <div class="message-wrap" *ngIf="is_chats_loading === false">
+    <div *ngFor="let item of chats"
+      class="message"
+      [class.left]="item.user_id !== sender"
+      [class.right]="item.user_id === sender">
+      <div class="msg-detail" *ngIf="item.is_request === false">
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker ">{{ item.message }}</p>
+          <p text-right>
+            <small>
+              {{ getRelativeDateTime (item.date) }}
+            </small>
+          </p>
+          <img *ngIf="item.image !== ''" class="image-preview" [src]="item.image" (click)="viewImage (item.image)">
+        </div>
+      </div>
+
+      <div class="msg-detail border-radius-6" *ngIf="item.is_request === true">
+        <ion-card class="request-body">
+          <ion-item class="request-body" text-wrap>
+            <h3>{{ item.request.service_name }}</h3>
+            <ion-button fill="outline" color="dark" slot="end">Ver</ion-button>
+          </ion-item>
+
+          <ion-card-content>
+            {{ item.request.note }}
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <form [formGroup]="form">
+      <ion-card>
+        <ion-row>
+          <ion-col size="8">
+            <ion-textarea formControlName="message" type="text" placeholder="Escribe un mensaje" 
+              spellcheck=true autocapitalize="on" autoGrow=true (keyup.enter)="onSubmit ()">
+            </ion-textarea>
+          </ion-col>
+
+          <ion-col size="2">
+            <ion-button fill="clear" color="dark" (click)="selectImageSource ()">
+              <ion-icon slot="icon-only" name="attach"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="2">
+            <ion-button fill="clear" color="dark" [disabled]="!form.valid" (click)="onSubmit ()">
+              <ion-icon slot="icon-only" name="ios-send"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+    </form>
+  </ion-toolbar>
+</ion-footer>
+<!--ion-footer>
+  <ion-toolbar>
+    <form [formGroup]="form">
+      <ion-item lines="none">
+        <ion-button slot="start" fill="clear" color="dark" class="attach-button" (click)="selectImageSource ()">
+          <ion-icon slot="icon-only" name="image"></ion-icon>
+        </ion-button>
+        <ion-textarea class="chat-entry" formControlName="message" type="text" placeholder="Escribe un mensaje" 
+          spellcheck=true autocapitalize="on" autoGrow=true (keyup.enter)="onSubmit ()">
+        </ion-textarea>
+        <ion-button slot="end" fill="clear" color="dark" class="send-button" [disabled]="!form.valid" (click)="onSubmit ()">
+          <ion-icon slot="icon-only" name="ios-send"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </form>
+  </ion-toolbar>
+</ion-footer-->
